@@ -4,6 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: R_notebooks/01_r-notebook-linear-model-overfiting
+- file: R_notebooks/02_ols-and-lasso-for-wage-prediction
+- file: R_notebooks/03_ols-and-lasso-for-gender-wage-gap-inference
+- file: R_notebooks/04_r-notebook-some-rct-examples
