@@ -193,7 +193,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/tjhon/test_gha/master?urlpath=tree/docs/R_notebooks/01_r-notebook-linear-model-overfiting.ipynb"
+        <a href="https://mybinder.org/v2/gh/tjhon/test_gha/master?urlpath=tree/R_notebooks/R_notebooks/01_r-notebook-linear-model-overfiting.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -207,6 +207,42 @@ title="Launch on Binder"
   </span>
 <span class="headerbtn__text-container">Binder</span>
 </a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/tjhon/test_gha/blob/master/R_notebooks/R_notebooks/01_r-notebook-linear-model-overfiting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
 
       </li>
       
@@ -1494,7 +1530,7 @@ F-statistic:   NaN on 999 and 0 DF,  p-value: NA
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
+            repo: "tjhon/test_gha",
             ref: "master",
         },
         codeMirrorConfig: {
