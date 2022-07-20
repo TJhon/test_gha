@@ -1,0 +1,1387 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Introduction &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="An inferential problem: The Gender Wage Gap" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" />
+    <link rel="prev" title="Simple Exercise on Overfitting" href="01_r-notebook-linear-model-overfiting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_r-notebook-linear-model-overfiting.html">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_r-notebook-some-rct-examples.html">
+   Polio RCT
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/tjhon/test_gha/master?urlpath=tree/docs/R_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/tjhon/test_gha"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/tjhon/test_gha/issues/new?title=Issue%20on%20page%20%2FR_notebooks/02_ols-and-lasso-for-wage-prediction.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/R_notebooks/02_ols-and-lasso-for-wage-prediction.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-analysis">
+   Data analysis
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-question">
+   Prediction Question
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-the-basic-model-consists-of-51-regressors">
+     Note that the basic model consists of
+     <span class="math notranslate nohighlight">
+      \(51\)
+     </span>
+     regressors.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-the-flexible-model-consists-of-246-regressors">
+     Note that the flexible model consists of
+     <span class="math notranslate nohighlight">
+      \(246\)
+     </span>
+     regressors.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-estimating-the-flexible-model-using-lasso">
+     Re-estimating the flexible model using Lasso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models">
+     Evaluating the predictive performance of the basic and flexible models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-splitting">
+   Data Splitting
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Introduction</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data">
+   Data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-analysis">
+   Data analysis
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prediction-question">
+   Prediction Question
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-the-basic-model-consists-of-51-regressors">
+     Note that the basic model consists of
+     <span class="math notranslate nohighlight">
+      \(51\)
+     </span>
+     regressors.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-that-the-flexible-model-consists-of-246-regressors">
+     Note that the flexible model consists of
+     <span class="math notranslate nohighlight">
+      \(246\)
+     </span>
+     regressors.
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-estimating-the-flexible-model-using-lasso">
+     Re-estimating the flexible model using Lasso
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models">
+     Evaluating the predictive performance of the basic and flexible models
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-splitting">
+   Data Splitting
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <p>This notebook contains an example for teaching.</p>
+<section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
+<p>An important question in labour economics is what determines the wage of workers. This is a causal question, but we can begin to investigate it from a predictive perspective.</p>
+<p>In the following wage example, <span class="math notranslate nohighlight">\(Y\)</span> is the hourly wage of a worker and <span class="math notranslate nohighlight">\(X\)</span> is a vector of worker’s characteristics, e.g., education, experience, gender. Two main questions here are:</p>
+<ul class="simple">
+<li><p>How can we use job-relevant characteristics, such as education and experience, to best predict wages?</p></li>
+<li><p>What is the difference in predicted wages between men and women with the same job-relevant characteristics?</p></li>
+</ul>
+<p>In this lab, we focus on the prediction question first.</p>
+</section>
+<section id="data">
+<h1>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h1>
+<p>The data set we consider is from the 2015 March Supplement of the U.S. Current Population Survey.  We select white non-hispanic individuals, aged 25 to 64 years, and working more than 35 hours per week for at least 50 weeks of the year. We exclude self-employed workers; individuals living in group quarters; individuals in the military, agricultural or private household sectors;  individuals with inconsistent reports on earnings and employment status; individuals with allocated or missing information in any of the variables used in the analysis; and individuals with hourly wage below <span class="math notranslate nohighlight">\(3\)</span>.</p>
+<p>The variable of interest <span class="math notranslate nohighlight">\(Y\)</span> is the hourly wage rate constructed as the ratio of the annual earnings to the total number of hours worked, which is constructed in turn as the product of number of weeks worked and the usual number of hours worked per week. In our analysis, we also focus on single (never married) workers. The final sample is of size <span class="math notranslate nohighlight">\(n=5150\)</span>.</p>
+</section>
+<section id="data-analysis">
+<h1>Data analysis<a class="headerlink" href="#data-analysis" title="Permalink to this headline">#</a></h1>
+<p>We start by loading the data set.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">load</span><span class="p">(</span><span class="s">&quot;../input/wage2015-inference/wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+<span class="nf">dim</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message in readChar(con, 5L, useBytes = TRUE):
+“cannot open compressed file &#39;../input/wage2015-inference/wage2015_subsample_inference.Rdata&#39;, probable reason &#39;No such file or directory&#39;”
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span> <span class="ow">in</span> <span class="n">readChar</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="mi">5</span><span class="n">L</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">):</span> <span class="n">cannot</span> <span class="nb">open</span> <span class="n">the</span> <span class="n">connection</span>
+<span class="ne">Traceback</span>:
+
+<span class="mi">1</span><span class="o">.</span> <span class="n">load</span><span class="p">(</span><span class="s2">&quot;../input/wage2015-inference/wage2015_subsample_inference.Rdata&quot;</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">.</span> <span class="n">readChar</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="mi">5</span><span class="n">L</span><span class="p">,</span> <span class="n">useBytes</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a look at the structure of the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">str</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;data.frame&#39;:	5150 obs. of  20 variables:
+ $ wage : num  9.62 48.08 11.06 13.94 28.85 ...
+ $ lwage: num  2.26 3.87 2.4 2.63 3.36 ...
+ $ sex  : num  1 0 0 1 1 1 1 0 1 1 ...
+ $ shs  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ hsg  : num  0 0 1 0 0 0 1 1 1 0 ...
+ $ scl  : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ clg  : num  1 1 0 0 1 1 0 0 0 1 ...
+ $ ad   : num  0 0 0 1 0 0 0 0 0 0 ...
+ $ mw   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ so   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ we   : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ ne   : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ exp1 : num  7 31 18 25 22 1 42 37 31 4 ...
+ $ exp2 : num  0.49 9.61 3.24 6.25 4.84 ...
+ $ exp3 : num  0.343 29.791 5.832 15.625 10.648 ...
+ $ exp4 : num  0.24 92.35 10.5 39.06 23.43 ...
+ $ occ  : Factor w/ 369 levels &quot;10&quot;,&quot;20&quot;,&quot;40&quot;,..: 159 136 269 23 99 86 226 232 184 146 ...
+ $ occ2 : Factor w/ 22 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 11 10 19 1 6 5 17 17 13 10 ...
+ $ ind  : Factor w/ 236 levels &quot;370&quot;,&quot;380&quot;,&quot;390&quot;,..: 204 117 12 165 231 176 171 135 210 201 ...
+ $ ind2 : Factor w/ 21 levels &quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;,..: 17 8 3 11 21 13 13 8 18 17 ...
+</pre></div>
+</div>
+</div>
+</div>
+<p>We construct the output variable <span class="math notranslate nohighlight">\(Y\)</span> and the matrix <span class="math notranslate nohighlight">\(Z\)</span> which includes the characteristics of workers that are given in the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct matrices for estimation from the data </span>
+<span class="n">Y</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">data</span><span class="o">$</span><span class="n">wage</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;wage&quot;</span><span class="p">,</span><span class="s">&quot;lwage&quot;</span><span class="p">))]</span>
+<span class="n">p</span> <span class="o">&lt;-</span> <span class="nf">dim</span><span class="p">(</span><span class="n">Z</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Number of observations:&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s">&#39;\n&#39;</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span> <span class="s">&quot;Number of raw regressors:&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of observations: 5150 
+Number of raw regressors: 18
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the outcome variable <em>wage</em> and a subset of the raw regressors, we calculate the empirical mean to get familiar with the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate a table of means of variables </span>
+<span class="nf">library</span><span class="p">(</span><span class="n">xtable</span><span class="p">)</span> 
+<span class="n">Z_subset</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="nf">which</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">%in%</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;lwage&quot;</span><span class="p">,</span><span class="s">&quot;sex&quot;</span><span class="p">,</span><span class="s">&quot;shs&quot;</span><span class="p">,</span><span class="s">&quot;hsg&quot;</span><span class="p">,</span><span class="s">&quot;scl&quot;</span><span class="p">,</span><span class="s">&quot;clg&quot;</span><span class="p">,</span><span class="s">&quot;ad&quot;</span><span class="p">,</span><span class="s">&quot;mw&quot;</span><span class="p">,</span><span class="s">&quot;so&quot;</span><span class="p">,</span><span class="s">&quot;we&quot;</span><span class="p">,</span><span class="s">&quot;ne&quot;</span><span class="p">,</span><span class="s">&quot;exp1&quot;</span><span class="p">))]</span>
+<span class="n">table</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">lapply</span><span class="p">(</span><span class="n">Z_subset</span><span class="p">,</span><span class="n">mean</span><span class="p">))</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Log Wage&quot;</span><span class="p">,</span><span class="s">&quot;Sex&quot;</span><span class="p">,</span><span class="s">&quot;Some High School&quot;</span><span class="p">,</span><span class="s">&quot;High School Graduate&quot;</span><span class="p">,</span><span class="s">&quot;Some College&quot;</span><span class="p">,</span><span class="s">&quot;College Graduate&quot;</span><span class="p">,</span> <span class="s">&quot;Advanced Degree&quot;</span><span class="p">,</span><span class="s">&quot;Midwest&quot;</span><span class="p">,</span><span class="s">&quot;South&quot;</span><span class="p">,</span><span class="s">&quot;West&quot;</span><span class="p">,</span><span class="s">&quot;Northeast&quot;</span><span class="p">,</span><span class="s">&quot;Experience&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Sample mean&quot;</span><span class="p">)</span>
+<span class="n">tab</span><span class="o">&lt;-</span> <span class="nf">xtable</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="n">tab</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A xtable: 12 × 1</caption>
+<thead>
+	<tr><th></th><th scope=col>Sample mean</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>Log Wage</th><td> 2.97078670</td></tr>
+	<tr><th scope=row>Sex</th><td> 0.44446602</td></tr>
+	<tr><th scope=row>Some High School</th><td> 0.02330097</td></tr>
+	<tr><th scope=row>High School Graduate</th><td> 0.24388350</td></tr>
+	<tr><th scope=row>Some College</th><td> 0.27805825</td></tr>
+	<tr><th scope=row>College Graduate</th><td> 0.31766990</td></tr>
+	<tr><th scope=row>Advanced Degree</th><td> 0.13708738</td></tr>
+	<tr><th scope=row>Midwest</th><td> 0.25961165</td></tr>
+	<tr><th scope=row>South</th><td> 0.29650485</td></tr>
+	<tr><th scope=row>West</th><td> 0.21611650</td></tr>
+	<tr><th scope=row>Northeast</th><td> 0.22776699</td></tr>
+	<tr><th scope=row>Experience</th><td>13.76058252</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>E.g., the share of female workers in our sample is ~44% (<span class="math notranslate nohighlight">\(sex=1\)</span> if female).</p>
+<p>Alternatively, using the xtable package, we can also print the table in LaTeX.</p>
+</section>
+<section id="prediction-question">
+<h1>Prediction Question<a class="headerlink" href="#prediction-question" title="Permalink to this headline">#</a></h1>
+<p>Now, we will construct a prediction rule for hourly wage <span class="math notranslate nohighlight">\(Y\)</span>, which depends linearly on job-relevant characteristics <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<p>\begin{equation}\label{decompose}
+Y = \beta’X+ \epsilon.
+\end{equation}</p>
+<p>Our goals are</p>
+<ul class="simple">
+<li><p>Predict wages using various characteristics of workers.</p></li>
+<li><p>Assess the predictive performance of a given model using the (adjusted) sample MSE, the (adjusted) sample <span class="math notranslate nohighlight">\(R^2\)</span> and the out-of-sample MSE and <span class="math notranslate nohighlight">\(R^2\)</span>.</p></li>
+</ul>
+<p>We employ two different specifications for prediction:</p>
+<ol class="simple">
+<li><p>Basic Model:   <span class="math notranslate nohighlight">\(X\)</span> consists of a set of raw regressors (e.g. gender, experience, education indicators,  occupation and industry indicators and regional indicators).</p></li>
+<li><p>Flexible Model:  <span class="math notranslate nohighlight">\(X\)</span> consists of all raw regressors from the basic model plus a dictionary of transformations (e.g., <span class="math notranslate nohighlight">\({exp}^2\)</span> and <span class="math notranslate nohighlight">\({exp}^3\)</span>) and additional two-way interactions of a polynomial in experience with other regressors. An example of a regressor created through a two-way interaction is <em>experience</em> times the indicator of having a <em>college degree</em>.</p></li>
+</ol>
+<p>Using the <strong>Flexible Model</strong> enables us to approximate the real relationship by a more complex regression model and therefore to reduce the bias. The <strong>Flexible Model</strong> increases the range of potential shapes of the estimated regression function. In general, flexible models often deliver higher prediction accuracy but are harder to interpret.</p>
+<p>Now, let us fit both models to our data by running ordinary least squares (ols):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. basic model</span>
+<span class="n">basic</span> <span class="o">&lt;-</span> <span class="n">lwage</span><span class="o">~</span> <span class="p">(</span><span class="n">sex</span> <span class="o">+</span> <span class="n">exp1</span> <span class="o">+</span> <span class="n">shs</span> <span class="o">+</span> <span class="n">hsg</span><span class="o">+</span> <span class="n">scl</span> <span class="o">+</span> <span class="n">clg</span> <span class="o">+</span> <span class="n">mw</span> <span class="o">+</span> <span class="n">so</span> <span class="o">+</span> <span class="n">we</span> <span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span><span class="p">)</span>
+<span class="n">regbasic</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">basic</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span> <span class="c1"># perform ols using the defined model</span>
+<span class="n">regbasic</span> <span class="c1"># estimated coefficients</span>
+<span class="nf">cat</span><span class="p">(</span> <span class="s">&quot;Number of regressors in the basic model:&quot;</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">regbasic</span><span class="o">$</span><span class="n">coef</span><span class="p">),</span> <span class="s">&#39;\n&#39;</span><span class="p">)</span> <span class="c1"># number of regressors in the Basic Model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = basic, data = data)
+
+Coefficients:
+(Intercept)          sex         exp1          shs          hsg          scl  
+   3.722235    -0.072857     0.008568    -0.592798    -0.504337    -0.411994  
+        clg           mw           so           we        occ22        occ23  
+  -0.182216    -0.027541    -0.034454     0.017249    -0.076472    -0.034678  
+      occ24        occ25        occ26        occ27        occ28        occ29  
+  -0.096202    -0.187915    -0.414933    -0.045987    -0.377847    -0.215752  
+     occ210       occ211       occ212       occ213       occ214       occ215  
+  -0.010623    -0.455834    -0.307589    -0.361440    -0.499495    -0.464482  
+     occ216       occ217       occ218       occ219       occ220       occ221  
+  -0.233715    -0.412588    -0.340418    -0.241480    -0.212628    -0.288413  
+     occ222        ind23        ind24        ind25        ind26        ind27  
+  -0.422394    -0.116836    -0.244493    -0.273533    -0.249368    -0.139588  
+      ind28        ind29       ind210       ind211       ind212       ind213  
+  -0.242948    -0.387485    -0.193851    -0.169063    -0.077436    -0.172604  
+     ind214       ind215       ind216       ind217       ind218       ind219  
+  -0.187005    -0.325364    -0.315399    -0.304405    -0.335386    -0.374121  
+     ind220       ind221       ind222  
+  -0.551932    -0.316679    -0.118971  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of regressors in the basic model: 51 
+</pre></div>
+</div>
+</div>
+</div>
+<section id="note-that-the-basic-model-consists-of-51-regressors">
+<h2>Note that the basic model consists of <span class="math notranslate nohighlight">\(51\)</span> regressors.<a class="headerlink" href="#note-that-the-basic-model-consists-of-51-regressors" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2. flexible model</span>
+<span class="n">flex</span> <span class="o">&lt;-</span> <span class="n">lwage</span> <span class="o">~</span> <span class="n">sex</span> <span class="o">+</span> <span class="n">shs</span><span class="o">+</span><span class="n">hsg</span><span class="o">+</span><span class="n">scl</span><span class="o">+</span><span class="n">clg</span><span class="o">+</span><span class="n">mw</span><span class="o">+</span><span class="n">so</span><span class="o">+</span><span class="n">we</span><span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span> <span class="o">+</span> <span class="p">(</span><span class="n">exp1</span><span class="o">+</span><span class="n">exp2</span><span class="o">+</span><span class="n">exp3</span><span class="o">+</span><span class="n">exp4</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">shs</span><span class="o">+</span><span class="n">hsg</span><span class="o">+</span><span class="n">scl</span><span class="o">+</span><span class="n">clg</span><span class="o">+</span><span class="n">occ2</span><span class="o">+</span><span class="n">ind2</span><span class="o">+</span><span class="n">mw</span><span class="o">+</span><span class="n">so</span><span class="o">+</span><span class="n">we</span><span class="p">)</span>
+<span class="n">regflex</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">flex</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">regflex</span> <span class="c1"># estimated coefficients</span>
+<span class="nf">cat</span><span class="p">(</span> <span class="s">&quot;Number of regressors in the flexible model:&quot;</span><span class="p">,</span><span class="nf">length</span><span class="p">(</span><span class="n">regflex</span><span class="o">$</span><span class="n">coef</span><span class="p">))</span> <span class="c1"># number of regressors in the Flexible Model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = flex, data = data)
+
+Coefficients:
+(Intercept)          sex          shs          hsg          scl          clg  
+  3.8602606   -0.0695532   -0.1233089   -0.5289024   -0.2920581   -0.0411641  
+         mw           so           we        occ22        occ23        occ24  
+  0.1106834    0.0224244   -0.0215659    0.1613397    0.2101514    0.0708570  
+      occ25        occ26        occ27        occ28        occ29       occ210  
+ -0.3960076   -0.2310611    0.3147249   -0.1875417   -0.3390270    0.0209545  
+     occ211       occ212       occ213       occ214       occ215       occ216  
+ -0.6424177   -0.0674774   -0.2329781    0.2562009   -0.1938585   -0.0551256  
+     occ217       occ218       occ219       occ220       occ221       occ222  
+ -0.4156093   -0.4822168   -0.2579412   -0.3010203   -0.4271811   -0.8694527  
+      ind23        ind24        ind25        ind26        ind27        ind28  
+ -1.2473654   -0.0948281   -0.5293860   -0.6221688   -0.5047497   -0.7295442  
+      ind29       ind210       ind211       ind212       ind213       ind214  
+ -0.8025334   -0.5805840   -0.9852350   -0.7375777   -1.0183283   -0.5860174  
+     ind215       ind216       ind217       ind218       ind219       ind220  
+ -0.3801359   -0.5703905   -0.8201843   -0.7613604   -0.8812815   -0.9099021  
+     ind221       ind222         exp1         exp2         exp3         exp4  
+ -0.7586534   -0.4040775   -0.0677247    1.6362944   -0.9154735    0.1429357  
+   shs:exp1     hsg:exp1     scl:exp1     clg:exp1   occ22:exp1   occ23:exp1  
+ -0.1919981   -0.0173433   -0.0664505   -0.0550346   -0.0736239   -0.0714859  
+ occ24:exp1   occ25:exp1   occ26:exp1   occ27:exp1   occ28:exp1   occ29:exp1  
+ -0.0723997    0.0946732   -0.0348928   -0.2279338   -0.0727459    0.0274143  
+occ210:exp1  occ211:exp1  occ212:exp1  occ213:exp1  occ214:exp1  occ215:exp1  
+  0.0075628    0.1014221   -0.0862744    0.0067149   -0.1369153   -0.0400425  
+occ216:exp1  occ217:exp1  occ218:exp1  occ219:exp1  occ220:exp1  occ221:exp1  
+ -0.0539314    0.0147277    0.1074099    0.0047165    0.0243156    0.0791776  
+occ222:exp1   ind23:exp1   ind24:exp1   ind25:exp1   ind26:exp1   ind27:exp1  
+  0.1093246    0.4758891    0.0147304    0.1256987    0.1540275    0.1029245  
+ ind28:exp1   ind29:exp1  ind210:exp1  ind211:exp1  ind212:exp1  ind213:exp1  
+  0.2357669    0.1359079    0.1512578    0.3174885    0.2591089    0.3396094  
+ind214:exp1  ind215:exp1  ind216:exp1  ind217:exp1  ind218:exp1  ind219:exp1  
+  0.1441411   -0.0568181    0.0847295    0.1728867    0.1565399    0.1516103  
+ind220:exp1  ind221:exp1  ind222:exp1      mw:exp1      so:exp1      we:exp1  
+  0.1326629    0.2190905    0.1145814   -0.0279931   -0.0099678    0.0063077  
+   shs:exp2     hsg:exp2     scl:exp2     clg:exp2   occ22:exp2   occ23:exp2  
+  1.9005060    0.1171642    0.6217923    0.4096746    0.6632173    0.6415456  
+ occ24:exp2   occ25:exp2   occ26:exp2   occ27:exp2   occ28:exp2   occ29:exp2  
+  0.9748422   -0.9778823    0.1050860    3.1407119    0.6710877    0.0231977  
+occ210:exp2  occ211:exp2  occ212:exp2  occ213:exp2  occ214:exp2  occ215:exp2  
+ -0.2692292   -1.0816539    0.8323737   -0.2209813    0.7511163   -0.0326858  
+occ216:exp2  occ217:exp2  occ218:exp2  occ219:exp2  occ220:exp2  occ221:exp2  
+  0.3635814   -0.2659285   -2.5608762   -0.1291756   -0.3323297   -0.9099997  
+occ222:exp2   ind23:exp2   ind24:exp2   ind25:exp2   ind26:exp2   ind27:exp2  
+ -0.8550536   -5.9368948   -1.1053411   -2.0149181   -2.2277748   -1.4648099  
+ ind28:exp2   ind29:exp2  ind210:exp2  ind211:exp2  ind212:exp2  ind213:exp2  
+ -2.9479949   -1.7796219   -2.1973300   -3.8776807   -3.1690425   -3.9651983  
+ind214:exp2  ind215:exp2  ind216:exp2  ind217:exp2  ind218:exp2  ind219:exp2  
+ -2.0783289    0.1911692   -1.3265850   -2.2002873   -2.2006232   -1.9308536  
+ind220:exp2  ind221:exp2  ind222:exp2      mw:exp2      so:exp2      we:exp2  
+ -1.9467267   -3.1127363   -1.8578340    0.2005611    0.0544354    0.0012717  
+   shs:exp3     hsg:exp3     scl:exp3     clg:exp3   occ22:exp3   occ23:exp3  
+ -0.6721239   -0.0179937   -0.1997877   -0.1025230   -0.2039403   -0.2369620  
+ occ24:exp3   occ25:exp3   occ26:exp3   occ27:exp3   occ28:exp3   occ29:exp3  
+ -0.4366958    0.3885298    0.0484737   -1.3949288   -0.2053899   -0.0909660  
+occ210:exp3  occ211:exp3  occ212:exp3  occ213:exp3  occ214:exp3  occ215:exp3  
+  0.1854753    0.3931553   -0.2202559    0.0950356   -0.1443933    0.1477077  
+occ216:exp3  occ217:exp3  occ218:exp3  occ219:exp3  occ220:exp3  occ221:exp3  
+ -0.0378548    0.1510497    1.4084443    0.0923425    0.1806994    0.3779083  
+occ222:exp3   ind23:exp3   ind24:exp3   ind25:exp3   ind26:exp3   ind27:exp3  
+  0.2855058    2.6665808    0.7298431    0.9942250    1.0641428    0.7089089  
+ ind28:exp3   ind29:exp3  ind210:exp3  ind211:exp3  ind212:exp3  ind213:exp3  
+  1.2340948    0.8287315    1.0448162    1.6877578    1.3734455    1.6376669  
+ind214:exp3  ind215:exp3  ind216:exp3  ind217:exp3  ind218:exp3  ind219:exp3  
+  1.0162910    0.1879483    0.6889680    1.0085540    1.0605598    0.8959865  
+ind220:exp3  ind221:exp3  ind222:exp3      mw:exp3      so:exp3      we:exp3  
+  0.9768944    1.4415215    0.9687884   -0.0625771   -0.0115842   -0.0124875  
+   shs:exp4     hsg:exp4     scl:exp4     clg:exp4   occ22:exp4   occ23:exp4  
+  0.0777418    0.0004913    0.0210760    0.0078695    0.0176389    0.0303057  
+ occ24:exp4   occ25:exp4   occ26:exp4   occ27:exp4   occ28:exp4   occ29:exp4  
+  0.0584146   -0.0515181   -0.0170182    0.1905353    0.0196522    0.0190014  
+occ210:exp4  occ211:exp4  occ212:exp4  occ213:exp4  occ214:exp4  occ215:exp4  
+ -0.0333347   -0.0465914    0.0110212   -0.0136895    0.0055582   -0.0327444  
+occ216:exp4  occ217:exp4  occ218:exp4  occ219:exp4  occ220:exp4  occ221:exp4  
+ -0.0089706   -0.0256735   -0.2121372   -0.0169398   -0.0296125   -0.0524577  
+occ222:exp4   ind23:exp4   ind24:exp4   ind25:exp4   ind26:exp4   ind27:exp4  
+ -0.0350646   -0.3851791   -0.1209478   -0.1441045   -0.1526110   -0.1001993  
+ ind28:exp4   ind29:exp4  ind210:exp4  ind211:exp4  ind212:exp4  ind213:exp4  
+ -0.1609664   -0.1178080   -0.1482842   -0.2322961   -0.1872911   -0.2155617  
+ind214:exp4  ind215:exp4  ind216:exp4  ind217:exp4  ind218:exp4  ind219:exp4  
+ -0.1483524   -0.0532195   -0.1044336   -0.1427349   -0.1546248   -0.1269592  
+ind220:exp4  ind221:exp4  ind222:exp4      mw:exp4      so:exp4      we:exp4  
+ -0.1468554   -0.2032619   -0.1480951    0.0062439    0.0003145    0.0017685  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of regressors in the flexible model: 246
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="note-that-the-flexible-model-consists-of-246-regressors">
+<h2>Note that the flexible model consists of <span class="math notranslate nohighlight">\(246\)</span> regressors.<a class="headerlink" href="#note-that-the-flexible-model-consists-of-246-regressors" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="re-estimating-the-flexible-model-using-lasso">
+<h2>Re-estimating the flexible model using Lasso<a class="headerlink" href="#re-estimating-the-flexible-model-using-lasso" title="Permalink to this headline">#</a></h2>
+<p>We re-estimate the flexible model using Lasso (the least absolute shrinkage and selection operator) rather than ols. Lasso is a penalized regression method that can be used to reduce the complexity of a regression model when the ratio <span class="math notranslate nohighlight">\(p/n\)</span> is not small. We will introduce this approach formally later in the course, but for now, we try it out here as a black-box method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flexible model using Lasso</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">hdm</span><span class="p">)</span>
+<span class="n">lassoreg</span><span class="o">&lt;-</span> <span class="nf">rlasso</span><span class="p">(</span><span class="n">flex</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span> 
+<span class="n">sumlasso</span><span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">lassoreg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+rlasso.formula(formula = flex, data = data)
+
+Post-Lasso Estimation:  TRUE 
+
+Total number of variables: 245
+Number of selected variables: 24 
+
+Residuals: 
+     Min       1Q   Median       3Q      Max 
+-2.03159 -0.29132 -0.01137  0.28472  3.63651 
+
+            Estimate
+(Intercept)    3.137
+sex            0.000
+shs           -0.480
+hsg           -0.404
+scl           -0.306
+clg            0.000
+mw             0.000
+so             0.000
+we             0.000
+occ22          0.041
+occ23          0.109
+occ24          0.000
+occ25          0.000
+occ26         -0.327
+occ27          0.000
+occ28         -0.257
+occ29          0.000
+occ210         0.038
+occ211        -0.398
+occ212         0.000
+occ213        -0.131
+occ214        -0.189
+occ215        -0.387
+occ216         0.000
+occ217        -0.280
+occ218         0.000
+occ219         0.000
+occ220         0.000
+occ221         0.000
+occ222        -0.209
+ind23          0.000
+ind24          0.000
+ind25          0.000
+ind26          0.000
+ind27          0.000
+ind28          0.000
+ind29         -0.169
+ind210         0.000
+ind211         0.000
+ind212         0.193
+ind213         0.000
+ind214         0.076
+ind215         0.000
+ind216         0.000
+ind217         0.000
+ind218         0.000
+ind219         0.000
+ind220        -0.225
+ind221         0.000
+ind222         0.140
+exp1           0.009
+exp2           0.000
+exp3           0.000
+exp4           0.000
+shs:exp1       0.000
+hsg:exp1       0.000
+scl:exp1       0.000
+clg:exp1       0.000
+occ22:exp1     0.000
+occ23:exp1     0.000
+occ24:exp1     0.000
+occ25:exp1     0.000
+occ26:exp1     0.000
+occ27:exp1     0.000
+occ28:exp1     0.000
+occ29:exp1     0.000
+occ210:exp1    0.003
+occ211:exp1    0.000
+occ212:exp1    0.000
+occ213:exp1   -0.011
+occ214:exp1   -0.009
+occ215:exp1    0.000
+occ216:exp1    0.000
+occ217:exp1    0.000
+occ218:exp1    0.000
+occ219:exp1    0.000
+occ220:exp1    0.000
+occ221:exp1    0.000
+occ222:exp1    0.000
+ind23:exp1     0.000
+ind24:exp1     0.000
+ind25:exp1     0.000
+ind26:exp1     0.000
+ind27:exp1     0.000
+ind28:exp1     0.000
+ind29:exp1     0.000
+ind210:exp1    0.000
+ind211:exp1    0.000
+ind212:exp1    0.000
+ind213:exp1    0.000
+ind214:exp1    0.004
+ind215:exp1    0.000
+ind216:exp1    0.000
+ind217:exp1    0.000
+ind218:exp1    0.000
+ind219:exp1    0.000
+ind220:exp1    0.000
+ind221:exp1    0.000
+ind222:exp1    0.000
+mw:exp1        0.000
+so:exp1        0.000
+we:exp1        0.000
+shs:exp2       0.000
+hsg:exp2       0.000
+scl:exp2       0.000
+clg:exp2       0.000
+occ22:exp2     0.000
+occ23:exp2     0.000
+occ24:exp2     0.000
+occ25:exp2     0.000
+occ26:exp2     0.000
+occ27:exp2     0.000
+occ28:exp2     0.000
+occ29:exp2     0.000
+occ210:exp2    0.000
+occ211:exp2    0.000
+occ212:exp2    0.000
+occ213:exp2    0.000
+occ214:exp2    0.000
+occ215:exp2    0.000
+occ216:exp2    0.000
+occ217:exp2    0.000
+occ218:exp2    0.000
+occ219:exp2    0.000
+occ220:exp2    0.000
+occ221:exp2    0.000
+occ222:exp2    0.000
+ind23:exp2     0.000
+ind24:exp2     0.000
+ind25:exp2     0.000
+ind26:exp2     0.000
+ind27:exp2     0.000
+ind28:exp2     0.000
+ind29:exp2     0.000
+ind210:exp2    0.000
+ind211:exp2    0.000
+ind212:exp2    0.000
+ind213:exp2    0.000
+ind214:exp2    0.000
+ind215:exp2    0.000
+ind216:exp2    0.000
+ind217:exp2    0.000
+ind218:exp2    0.000
+ind219:exp2    0.000
+ind220:exp2    0.000
+ind221:exp2    0.000
+ind222:exp2    0.000
+mw:exp2        0.000
+so:exp2        0.000
+we:exp2        0.000
+shs:exp3       0.000
+hsg:exp3       0.000
+scl:exp3       0.000
+clg:exp3       0.000
+occ22:exp3     0.000
+occ23:exp3     0.000
+occ24:exp3     0.000
+occ25:exp3     0.000
+occ26:exp3     0.000
+occ27:exp3     0.000
+occ28:exp3     0.000
+occ29:exp3     0.000
+occ210:exp3    0.000
+occ211:exp3    0.000
+occ212:exp3    0.000
+occ213:exp3    0.000
+occ214:exp3    0.000
+occ215:exp3    0.000
+occ216:exp3    0.000
+occ217:exp3    0.000
+occ218:exp3    0.000
+occ219:exp3    0.000
+occ220:exp3    0.000
+occ221:exp3    0.000
+occ222:exp3    0.000
+ind23:exp3     0.000
+ind24:exp3     0.000
+ind25:exp3     0.000
+ind26:exp3     0.000
+ind27:exp3     0.000
+ind28:exp3     0.000
+ind29:exp3     0.000
+ind210:exp3    0.000
+ind211:exp3    0.000
+ind212:exp3    0.000
+ind213:exp3    0.000
+ind214:exp3    0.000
+ind215:exp3    0.000
+ind216:exp3    0.000
+ind217:exp3    0.000
+ind218:exp3    0.000
+ind219:exp3    0.000
+ind220:exp3    0.000
+ind221:exp3    0.000
+ind222:exp3    0.000
+mw:exp3        0.000
+so:exp3        0.000
+we:exp3        0.000
+shs:exp4       0.000
+hsg:exp4       0.000
+scl:exp4       0.000
+clg:exp4       0.000
+occ22:exp4     0.000
+occ23:exp4     0.000
+occ24:exp4     0.000
+occ25:exp4     0.000
+occ26:exp4     0.000
+occ27:exp4     0.000
+occ28:exp4     0.000
+occ29:exp4     0.000
+occ210:exp4    0.000
+occ211:exp4    0.000
+occ212:exp4    0.000
+occ213:exp4    0.000
+occ214:exp4    0.000
+occ215:exp4    0.000
+occ216:exp4    0.000
+occ217:exp4    0.000
+occ218:exp4    0.000
+occ219:exp4    0.000
+occ220:exp4    0.000
+occ221:exp4    0.000
+occ222:exp4    0.000
+ind23:exp4     0.000
+ind24:exp4     0.000
+ind25:exp4     0.000
+ind26:exp4     0.000
+ind27:exp4     0.000
+ind28:exp4     0.000
+ind29:exp4     0.000
+ind210:exp4    0.000
+ind211:exp4    0.000
+ind212:exp4    0.000
+ind213:exp4    0.000
+ind214:exp4    0.000
+ind215:exp4    0.000
+ind216:exp4    0.000
+ind217:exp4    0.000
+ind218:exp4    0.000
+ind219:exp4    0.000
+ind220:exp4    0.000
+ind221:exp4    0.000
+ind222:exp4    0.000
+mw:exp4        0.000
+so:exp4        0.000
+we:exp4        0.000
+
+Residual standard error: 0.4847
+Multiple R-squared:  0.2779
+Adjusted R-squared:  0.2745
+Joint significance test:
+ the sup score statistic for joint significance test is 89.09 with a p-value of 0.006
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="evaluating-the-predictive-performance-of-the-basic-and-flexible-models">
+<h2>Evaluating the predictive performance of the basic and flexible models<a class="headerlink" href="#evaluating-the-predictive-performance-of-the-basic-and-flexible-models" title="Permalink to this headline">#</a></h2>
+<p>Now, we can evaluate the performance of both models based on the (adjusted) <span class="math notranslate nohighlight">\(R^2_{sample}\)</span> and the (adjusted) <span class="math notranslate nohighlight">\(MSE_{sample}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assess predictive performance</span>
+<span class="n">sumbasic</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">regbasic</span><span class="p">)</span>
+<span class="n">sumflex</span> <span class="o">&lt;-</span> <span class="nf">summary</span><span class="p">(</span><span class="n">regflex</span><span class="p">)</span>
+
+<span class="c1"># R-squared and adjusted R-squared</span>
+<span class="n">R2.1</span> <span class="o">&lt;-</span> <span class="n">sumbasic</span><span class="o">$</span><span class="n">r.squared</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;R-squared for the basic model: &quot;</span><span class="p">,</span> <span class="n">R2.1</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">R2.adj1</span> <span class="o">&lt;-</span> <span class="n">sumbasic</span><span class="o">$</span><span class="n">adj.r.squared</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;adjusted R-squared for the basic model: &quot;</span><span class="p">,</span> <span class="n">R2.adj1</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="n">R2.2</span> <span class="o">&lt;-</span> <span class="n">sumflex</span><span class="o">$</span><span class="n">r.squared</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;R-squared for the flexible model: &quot;</span><span class="p">,</span> <span class="n">R2.2</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">R2.adj2</span> <span class="o">&lt;-</span> <span class="n">sumflex</span><span class="o">$</span><span class="n">adj.r.squared</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;adjusted R-squared for the flexible model: &quot;</span><span class="p">,</span> <span class="n">R2.adj2</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="n">R2.L</span> <span class="o">&lt;-</span> <span class="n">sumlasso</span><span class="o">$</span><span class="n">r.squared</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;R-squared for the lasso with flexible model: &quot;</span><span class="p">,</span> <span class="n">R2.L</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">R2.adjL</span> <span class="o">&lt;-</span> <span class="n">sumlasso</span><span class="o">$</span><span class="n">adj.r.squared</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;adjusted R-squared for the flexible model: &quot;</span><span class="p">,</span> <span class="n">R2.L</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+
+
+<span class="c1"># MSE and adjusted MSE</span>
+<span class="n">MSE1</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">sumbasic</span><span class="o">$</span><span class="n">res</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;MSE for the basic model: &quot;</span><span class="p">,</span> <span class="n">MSE1</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">sumbasic</span><span class="o">$</span><span class="n">df</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="c1"># number of regressors</span>
+<span class="n">MSE.adj1</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">p1</span><span class="p">))</span><span class="o">*</span><span class="n">MSE1</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;adjusted MSE for the basic model: &quot;</span><span class="p">,</span> <span class="n">MSE.adj1</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+<span class="n">MSE2</span> <span class="o">&lt;-</span><span class="nf">mean</span><span class="p">(</span><span class="n">sumflex</span><span class="o">$</span><span class="n">res</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;MSE for the flexible model: &quot;</span><span class="p">,</span> <span class="n">MSE2</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">sumflex</span><span class="o">$</span><span class="n">df</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<span class="n">MSE.adj2</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">p2</span><span class="p">))</span><span class="o">*</span><span class="n">MSE2</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;adjusted MSE for the lasso flexible model: &quot;</span><span class="p">,</span> <span class="n">MSE.adj2</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+
+<span class="n">MSEL</span> <span class="o">&lt;-</span><span class="nf">mean</span><span class="p">(</span><span class="n">sumlasso</span><span class="o">$</span><span class="n">res</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;MSE for the lasso flexible model: &quot;</span><span class="p">,</span> <span class="n">MSEL</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="n">pL</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">sumlasso</span><span class="o">$</span><span class="n">coef</span><span class="p">)</span>
+<span class="n">MSE.adjL</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">pL</span><span class="p">))</span><span class="o">*</span><span class="n">MSEL</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;adjusted MSE for the lasso flexible model: &quot;</span><span class="p">,</span> <span class="n">MSE.adjL</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>R-squared for the basic model:  0.3100465 
+adjusted R-squared for the basic model:  0.3032809 
+R-squared for the flexible model:  0.3511099 
+adjusted R-squared for the flexible model:  0.3186919 
+R-squared for the lasso with flexible model:  0.2778653 
+adjusted R-squared for the flexible model:  0.2778653 
+MSE for the basic model:  0.2244251 
+adjusted MSE for the basic model:  0.2266697 
+MSE for the flexible model:  0.2110681 
+adjusted MSE for the lasso flexible model:  0.221656 
+MSE for the lasso flexible model:  0.2348928 
+adjusted MSE for the lasso flexible model:  0.2466758 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output the table</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">xtable</span><span class="p">)</span>
+<span class="n">table</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="n">R2.1</span><span class="p">,</span><span class="n">MSE1</span><span class="p">,</span><span class="n">R2.adj1</span><span class="p">,</span><span class="n">MSE.adj1</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="n">R2.2</span><span class="p">,</span><span class="n">MSE2</span><span class="p">,</span><span class="n">R2.adj2</span><span class="p">,</span><span class="n">MSE.adj2</span><span class="p">)</span>
+<span class="n">table</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">:</span><span class="m">5</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">pL</span><span class="p">,</span><span class="n">R2.L</span><span class="p">,</span><span class="n">MSEL</span><span class="p">,</span><span class="n">R2.adjL</span><span class="p">,</span><span class="n">MSE.adjL</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;p&quot;</span><span class="p">,</span><span class="s">&quot;$R^2_{sample}$&quot;</span><span class="p">,</span><span class="s">&quot;$MSE_{sample}$&quot;</span><span class="p">,</span><span class="s">&quot;$R^2_{adjusted}$&quot;</span><span class="p">,</span> <span class="s">&quot;$MSE_{adjusted}$&quot;</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">table</span><span class="p">)</span><span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;basic reg&quot;</span><span class="p">,</span><span class="s">&quot;flexible reg&quot;</span><span class="p">,</span> <span class="s">&quot;lasso flex&quot;</span><span class="p">)</span>
+<span class="n">tab</span><span class="o">&lt;-</span> <span class="nf">xtable</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="n">tab</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>% latex table generated in R 3.6.3 by xtable 1.8-4 package
+% Fri Jul 23 15:00:07 2021
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrr}
+  \hline
+ &amp; p &amp; \$R\verb|^|2\_\{sample\}\$ &amp; \$MSE\_\{sample\}\$ &amp; \$R\verb|^|2\_\{adjusted\}\$ &amp; \$MSE\_\{adjusted\}\$ \\ 
+  \hline
+basic reg &amp; 51 &amp; 0.31 &amp; 0.22 &amp; 0.30 &amp; 0.23 \\ 
+  flexible reg &amp; 246 &amp; 0.35 &amp; 0.21 &amp; 0.32 &amp; 0.22 \\ 
+  lasso flex &amp; 246 &amp; 0.28 &amp; 0.23 &amp; 0.27 &amp; 0.25 \\ 
+   \hline
+\end{tabular}
+\end{table}
+</pre></div>
+</div>
+<div class="output text_html"><table class="dataframe">
+<caption>A xtable: 3 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>p</th><th scope=col>$R^2_{sample}$</th><th scope=col>$MSE_{sample}$</th><th scope=col>$R^2_{adjusted}$</th><th scope=col>$MSE_{adjusted}$</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>basic reg</th><td> 51</td><td>0.3100465</td><td>0.2244251</td><td>0.3032809</td><td>0.2266697</td></tr>
+	<tr><th scope=row>flexible reg</th><td>246</td><td>0.3511099</td><td>0.2110681</td><td>0.3186919</td><td>0.2216560</td></tr>
+	<tr><th scope=row>lasso flex</th><td>246</td><td>0.2778653</td><td>0.2348928</td><td>0.2744836</td><td>0.2466758</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+<p>Considering the measures above, the flexible model performs slightly better than the basic model.</p>
+<p>As <span class="math notranslate nohighlight">\(p/n\)</span> is not large, the discrepancy between the adjusted and unadjusted measures is not large. However, if it were, we might still like to apply <strong>data splitting</strong> as a more general procedure to deal with potential overfitting if <span class="math notranslate nohighlight">\(p/n\)</span>. We illustrate the approach in the following.</p>
+</section>
+</section>
+<section id="data-splitting">
+<h1>Data Splitting<a class="headerlink" href="#data-splitting" title="Permalink to this headline">#</a></h1>
+<p>Measure the prediction quality of the two models via data splitting:</p>
+<ul class="simple">
+<li><p>Randomly split the data into one training sample and one testing sample. Here we just use a simple method (stratified splitting is a more sophisticated version of splitting that we might consider).</p></li>
+<li><p>Use the training sample to estimate the parameters of the Basic Model and the Flexible Model.</p></li>
+<li><p>Use the testing sample for evaluation. Predict the <span class="math notranslate nohighlight">\(\mathtt{wage}\)</span>  of every observation in the testing sample based on the estimated parameters in the training sample.</p></li>
+<li><p>Calculate the Mean Squared Prediction Error <span class="math notranslate nohighlight">\(MSE_{test}\)</span> based on the testing sample for both prediction models.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># splitting the data</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">1</span><span class="p">)</span> <span class="c1"># to make the results replicable (we will generate random numbers)</span>
+<span class="n">random</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="nf">floor</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="m">4</span><span class="o">/</span><span class="m">5</span><span class="p">))</span>
+<span class="c1"># draw (4/5)*n random numbers from 1 to n without replacing them</span>
+<span class="n">train</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="n">random</span><span class="p">,]</span> <span class="c1"># training sample</span>
+<span class="n">test</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="n">random</span><span class="p">,]</span> <span class="c1"># testing sample</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># basic model</span>
+<span class="c1"># estimating the parameters in the training sample</span>
+<span class="n">regbasic</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">basic</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">)</span>
+
+<span class="c1"># calculating the out-of-sample MSE</span>
+<span class="n">trainregbasic</span> <span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">regbasic</span><span class="p">,</span> <span class="n">newdata</span><span class="o">=</span><span class="n">test</span><span class="p">)</span>
+<span class="n">y.test</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">test</span><span class="o">$</span><span class="n">wage</span><span class="p">)</span>
+<span class="n">MSE.test1</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">((</span><span class="n">y.test</span><span class="o">-</span><span class="n">trainregbasic</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">y.test</span><span class="p">)</span>
+<span class="n">R2.test1</span><span class="o">&lt;-</span> <span class="m">1</span><span class="o">-</span> <span class="n">MSE.test1</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">y.test</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Test MSE for the basic model: &quot;</span><span class="p">,</span> <span class="n">MSE.test1</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Test R2 for the basic model: &quot;</span><span class="p">,</span> <span class="n">R2.test1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the basic model:  0.1971044  Test R2 for the basic model:  0.3279559
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the basic model, the <span class="math notranslate nohighlight">\(MSE_{test}\)</span> is quite close to the <span class="math notranslate nohighlight">\(MSE_{sample}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># flexible model</span>
+<span class="c1"># estimating the parameters</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">warn</span><span class="o">=</span><span class="m">-1</span><span class="p">)</span> <span class="c1"># ignore warnings </span>
+<span class="n">regflex</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">flex</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">)</span>
+
+<span class="c1"># calculating the out-of-sample MSE</span>
+<span class="n">trainregflex</span><span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">regflex</span><span class="p">,</span> <span class="n">newdata</span><span class="o">=</span><span class="n">test</span><span class="p">)</span>
+<span class="n">y.test</span> <span class="o">&lt;-</span> <span class="nf">log</span><span class="p">(</span><span class="n">test</span><span class="o">$</span><span class="n">wage</span><span class="p">)</span>
+<span class="n">MSE.test2</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">((</span><span class="n">y.test</span><span class="o">-</span><span class="n">trainregflex</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">y.test</span><span class="p">)</span>
+<span class="n">R2.test2</span><span class="o">&lt;-</span> <span class="m">1</span><span class="o">-</span> <span class="n">MSE.test2</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">y.test</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Test MSE for the flexible model: &quot;</span><span class="p">,</span> <span class="n">MSE.test2</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Test R2 for the flexible model: &quot;</span><span class="p">,</span> <span class="n">R2.test2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the flexible model:  0.2064107  Test R2 for the flexible model:  0.2962252
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the flexible model too, the discrepancy between the <span class="math notranslate nohighlight">\(MSE_{test}\)</span> and the <span class="math notranslate nohighlight">\(MSE_{sample}\)</span> is not large.</p>
+<p>It is worth noticing that the <span class="math notranslate nohighlight">\(MSE_{test}\)</span> varies across different data splits. Hence, it is a good idea to average the out-of-sample MSE over different data splits to get valid results.</p>
+<p>Nevertheless, we observe that, based on the out-of-sample <span class="math notranslate nohighlight">\(MSE\)</span>, the basic model using ols regression performs <strong>about as well (or slightly better)</strong> than the flexible model.</p>
+<p>Next, let us use lasso regression in the flexible model instead of ols regression. The out-of-sample <span class="math notranslate nohighlight">\(MSE\)</span> on the test sample can be computed for any black-box prediction method, so we also compare the performance of lasso regression in the flexible model to ols regression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># flexible model using lasso</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">hdm</span><span class="p">)</span> <span class="c1"># a library for high-dimensional metrics</span>
+<span class="n">reglasso</span> <span class="o">&lt;-</span> <span class="nf">rlasso</span><span class="p">(</span><span class="n">flex</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span> <span class="c1"># estimating the parameters</span>
+
+<span class="c1"># calculating the out-of-sample MSE</span>
+<span class="n">trainreglasso</span><span class="o">&lt;-</span> <span class="nf">predict</span><span class="p">(</span><span class="n">reglasso</span><span class="p">,</span> <span class="n">newdata</span><span class="o">=</span><span class="n">test</span><span class="p">)</span>
+<span class="n">MSE.lasso</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">((</span><span class="n">y.test</span><span class="o">-</span><span class="n">trainreglasso</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span><span class="o">/</span><span class="nf">length</span><span class="p">(</span><span class="n">y.test</span><span class="p">)</span>
+<span class="n">R2.lasso</span><span class="o">&lt;-</span> <span class="m">1</span><span class="o">-</span> <span class="n">MSE.lasso</span><span class="o">/</span><span class="nf">var</span><span class="p">(</span><span class="n">y.test</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Test MSE for the lasso on flexible model: &quot;</span><span class="p">,</span> <span class="n">MSE.lasso</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;Test R2 for the lasso flexible model: &quot;</span><span class="p">,</span> <span class="n">R2.lasso</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test MSE for the lasso on flexible model:  0.212698  Test R2 for the lasso flexible model:  0.2747882
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let us summarize the results:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output the comparison table</span>
+<span class="n">table2</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">)</span>
+<span class="n">table2</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="n">MSE.test1</span>
+<span class="n">table2</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="n">MSE.test2</span>
+<span class="n">table2</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="n">MSE.lasso</span>
+<span class="n">table2</span><span class="p">[</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="n">R2.test1</span>
+<span class="n">table2</span><span class="p">[</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="n">R2.test2</span>
+<span class="n">table2</span><span class="p">[</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">]</span>   <span class="o">&lt;-</span> <span class="n">R2.lasso</span>
+
+<span class="nf">rownames</span><span class="p">(</span><span class="n">table2</span><span class="p">)</span><span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;basic reg&quot;</span><span class="p">,</span><span class="s">&quot;flexible reg&quot;</span><span class="p">,</span><span class="s">&quot;lasso regression&quot;</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">table2</span><span class="p">)</span><span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;$MSE_{test}$&quot;</span><span class="p">,</span> <span class="s">&quot;$R^2_{test}$&quot;</span><span class="p">)</span>
+<span class="n">tab2</span> <span class="o">&lt;-</span> <span class="nf">xtable</span><span class="p">(</span><span class="n">table2</span><span class="p">,</span> <span class="n">digits</span> <span class="o">=</span><span class="m">3</span><span class="p">)</span>
+<span class="n">tab2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="dataframe">
+<caption>A xtable: 3 × 2</caption>
+<thead>
+	<tr><th></th><th scope=col>$MSE_{test}$</th><th scope=col>$R^2_{test}$</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>basic reg</th><td>0.1971044</td><td>0.3279559</td></tr>
+	<tr><th scope=row>flexible reg</th><td>0.2064107</td><td>0.2962252</td></tr>
+	<tr><th scope=row>lasso regression</th><td>0.2126980</td><td>0.2747882</td></tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./R_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="01_r-notebook-linear-model-overfiting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Simple Exercise on Overfitting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_ols-and-lasso-for-gender-wage-gap-inference.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">An inferential problem: The Gender Wage Gap</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
