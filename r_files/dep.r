@@ -2,9 +2,9 @@ install.packages("librarian")
 librarian::shelf(
     tidyverse
     , keras
-    , h20
+    , h2o
 )
 install.packages("remotes")
-devtools::install_github("IRkernel/IRkernel")
+remotes::install_github("IRkernel/IRkernel")
 
 IRkernel::installspec()
