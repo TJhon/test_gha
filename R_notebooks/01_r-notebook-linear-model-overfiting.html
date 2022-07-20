@@ -1,0 +1,1595 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Simple Exercise on Overfitting &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="02_ols-and-lasso-for-wage-prediction.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Simple Exercise on Overfitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_ols-and-lasso-for-wage-prediction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_ols-and-lasso-for-gender-wage-gap-inference.html">
+   An inferential problem: The Gender Wage Gap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_r-notebook-some-rct-examples.html">
+   Polio RCT
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/tjhon/test_gha/master?urlpath=tree/_build/jupyter_execute/R_notebooks/01_r-notebook-linear-model-overfiting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/tjhon/test_gha/blob/master/_build/jupyter_execute/R_notebooks/01_r-notebook-linear-model-overfiting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/tjhon/test_gha"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/tjhon/test_gha/issues/new?title=Issue%20on%20page%20%2FR_notebooks/01_r-notebook-linear-model-overfiting.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/R_notebooks/01_r-notebook-linear-model-overfiting.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Simple Exercise on Overfitting</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="simple-exercise-on-overfitting">
+<h1>Simple Exercise on Overfitting<a class="headerlink" href="#simple-exercise-on-overfitting" title="Permalink to this headline">#</a></h1>
+<p>First set p=n</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="m">1000</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">n</span>
+<span class="n">X</span><span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">p</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">Y</span><span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;p/n is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;R2 is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">))</span><span class="o">$</span><span class="n">r.squared</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;Adjusted R2 is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">))</span><span class="o">$</span><span class="n">adj.r.squared</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;p/n is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;R2 is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Adjusted R2 is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] NaN
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Call:
+lm(formula = Y ~ X)
+
+Residuals:
+ALL 1000 residuals are 0: no residual degrees of freedom!
+
+Coefficients: (1 not defined because of singularities)
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)  0.008655        NaN     NaN      NaN
+X1           0.209115        NaN     NaN      NaN
+X2           1.132843        NaN     NaN      NaN
+X3          -0.165923        NaN     NaN      NaN
+X4           0.342487        NaN     NaN      NaN
+X5           0.242521        NaN     NaN      NaN
+X6           0.509605        NaN     NaN      NaN
+X7          -0.606534        NaN     NaN      NaN
+X8           0.058212        NaN     NaN      NaN
+X9          -0.019057        NaN     NaN      NaN
+X10         -1.494588        NaN     NaN      NaN
+X11          1.356865        NaN     NaN      NaN
+X12         -0.729340        NaN     NaN      NaN
+X13         -0.470153        NaN     NaN      NaN
+X14          1.107937        NaN     NaN      NaN
+X15         -1.476039        NaN     NaN      NaN
+X16          0.118175        NaN     NaN      NaN
+X17         -0.391505        NaN     NaN      NaN
+X18          0.518608        NaN     NaN      NaN
+X19          1.114103        NaN     NaN      NaN
+X20          0.636189        NaN     NaN      NaN
+X21          1.322857        NaN     NaN      NaN
+X22         -0.030808        NaN     NaN      NaN
+X23         -1.074449        NaN     NaN      NaN
+X24         -1.379458        NaN     NaN      NaN
+X25         -0.376812        NaN     NaN      NaN
+X26          0.552202        NaN     NaN      NaN
+X27          1.369246        NaN     NaN      NaN
+X28         -0.336102        NaN     NaN      NaN
+X29         -0.258283        NaN     NaN      NaN
+X30         -0.160330        NaN     NaN      NaN
+X31         -1.629318        NaN     NaN      NaN
+X32          1.300626        NaN     NaN      NaN
+X33         -2.265792        NaN     NaN      NaN
+X34          0.929805        NaN     NaN      NaN
+X35          0.091034        NaN     NaN      NaN
+X36         -1.761984        NaN     NaN      NaN
+X37          1.001026        NaN     NaN      NaN
+X38          0.803340        NaN     NaN      NaN
+X39         -0.691695        NaN     NaN      NaN
+X40          1.569703        NaN     NaN      NaN
+X41         -0.226447        NaN     NaN      NaN
+X42          1.129300        NaN     NaN      NaN
+X43          0.168638        NaN     NaN      NaN
+X44         -0.031491        NaN     NaN      NaN
+X45         -0.298698        NaN     NaN      NaN
+X46          1.023639        NaN     NaN      NaN
+X47          1.098169        NaN     NaN      NaN
+X48         -0.287342        NaN     NaN      NaN
+X49          0.853412        NaN     NaN      NaN
+X50          0.929821        NaN     NaN      NaN
+X51         -1.759857        NaN     NaN      NaN
+X52         -0.080584        NaN     NaN      NaN
+X53         -0.912648        NaN     NaN      NaN
+X54          0.604134        NaN     NaN      NaN
+X55         -1.397731        NaN     NaN      NaN
+X56          1.713057        NaN     NaN      NaN
+X57          1.698768        NaN     NaN      NaN
+X58         -0.930517        NaN     NaN      NaN
+X59          1.273930        NaN     NaN      NaN
+X60         -0.416473        NaN     NaN      NaN
+X61         -1.463688        NaN     NaN      NaN
+X62         -0.039821        NaN     NaN      NaN
+X63          0.002601        NaN     NaN      NaN
+X64         -0.153827        NaN     NaN      NaN
+X65         -0.505608        NaN     NaN      NaN
+X66         -2.328897        NaN     NaN      NaN
+X67         -1.096400        NaN     NaN      NaN
+X68         -0.975806        NaN     NaN      NaN
+X69          0.442240        NaN     NaN      NaN
+X70          0.838267        NaN     NaN      NaN
+X71         -2.640011        NaN     NaN      NaN
+X72          0.288900        NaN     NaN      NaN
+X73          0.097104        NaN     NaN      NaN
+X74          0.937061        NaN     NaN      NaN
+X75          0.883015        NaN     NaN      NaN
+X76         -0.154411        NaN     NaN      NaN
+X77         -0.406959        NaN     NaN      NaN
+X78         -1.779714        NaN     NaN      NaN
+X79         -0.721536        NaN     NaN      NaN
+X80         -0.977086        NaN     NaN      NaN
+X81          0.190445        NaN     NaN      NaN
+X82         -0.031690        NaN     NaN      NaN
+X83         -0.552957        NaN     NaN      NaN
+X84          1.800244        NaN     NaN      NaN
+X85          0.244305        NaN     NaN      NaN
+X86         -0.416315        NaN     NaN      NaN
+X87         -0.754458        NaN     NaN      NaN
+X88         -0.864928        NaN     NaN      NaN
+X89          1.330665        NaN     NaN      NaN
+X90          1.357036        NaN     NaN      NaN
+X91          2.206505        NaN     NaN      NaN
+X92         -2.357417        NaN     NaN      NaN
+X93          1.656252        NaN     NaN      NaN
+X94         -1.401075        NaN     NaN      NaN
+X95         -1.269419        NaN     NaN      NaN
+X96          1.503634        NaN     NaN      NaN
+X97          0.578647        NaN     NaN      NaN
+X98         -2.050500        NaN     NaN      NaN
+X99         -0.752980        NaN     NaN      NaN
+X100        -0.717843        NaN     NaN      NaN
+X101         0.549787        NaN     NaN      NaN
+X102         0.680858        NaN     NaN      NaN
+X103        -0.202199        NaN     NaN      NaN
+X104        -0.447095        NaN     NaN      NaN
+X105         0.737180        NaN     NaN      NaN
+X106         0.498512        NaN     NaN      NaN
+X107         1.570093        NaN     NaN      NaN
+X108        -0.001534        NaN     NaN      NaN
+X109        -1.587872        NaN     NaN      NaN
+X110        -0.030060        NaN     NaN      NaN
+X111        -0.201464        NaN     NaN      NaN
+X112         0.483296        NaN     NaN      NaN
+X113         0.814163        NaN     NaN      NaN
+X114         0.168358        NaN     NaN      NaN
+X115        -2.576808        NaN     NaN      NaN
+X116         0.031049        NaN     NaN      NaN
+X117         1.870173        NaN     NaN      NaN
+X118        -0.820676        NaN     NaN      NaN
+X119         0.645875        NaN     NaN      NaN
+X120        -0.913998        NaN     NaN      NaN
+X121         0.670915        NaN     NaN      NaN
+X122         1.245607        NaN     NaN      NaN
+X123         1.497643        NaN     NaN      NaN
+X124         2.101069        NaN     NaN      NaN
+X125         0.533446        NaN     NaN      NaN
+X126         1.396378        NaN     NaN      NaN
+X127        -0.670199        NaN     NaN      NaN
+X128         0.246157        NaN     NaN      NaN
+X129         0.272349        NaN     NaN      NaN
+X130        -1.036925        NaN     NaN      NaN
+X131        -1.545498        NaN     NaN      NaN
+X132        -1.607572        NaN     NaN      NaN
+X133        -0.411833        NaN     NaN      NaN
+X134         0.367593        NaN     NaN      NaN
+X135        -1.018609        NaN     NaN      NaN
+X136         0.513105        NaN     NaN      NaN
+X137         0.619361        NaN     NaN      NaN
+X138         0.434161        NaN     NaN      NaN
+X139         1.660126        NaN     NaN      NaN
+X140         1.205988        NaN     NaN      NaN
+X141        -1.081737        NaN     NaN      NaN
+X142        -1.702413        NaN     NaN      NaN
+X143         1.343201        NaN     NaN      NaN
+X144        -0.862403        NaN     NaN      NaN
+X145         1.606800        NaN     NaN      NaN
+X146        -1.364493        NaN     NaN      NaN
+X147         0.170934        NaN     NaN      NaN
+X148         1.114339        NaN     NaN      NaN
+X149        -0.197418        NaN     NaN      NaN
+X150         0.923551        NaN     NaN      NaN
+X151        -1.649722        NaN     NaN      NaN
+X152        -1.308162        NaN     NaN      NaN
+X153        -1.024849        NaN     NaN      NaN
+X154         1.556613        NaN     NaN      NaN
+X155        -0.287642        NaN     NaN      NaN
+X156         1.790427        NaN     NaN      NaN
+X157         0.954010        NaN     NaN      NaN
+X158         1.425184        NaN     NaN      NaN
+X159         1.425443        NaN     NaN      NaN
+X160         1.299650        NaN     NaN      NaN
+X161        -0.926965        NaN     NaN      NaN
+X162         0.335887        NaN     NaN      NaN
+X163        -0.902530        NaN     NaN      NaN
+X164         0.735756        NaN     NaN      NaN
+X165         0.736488        NaN     NaN      NaN
+X166        -1.788143        NaN     NaN      NaN
+X167         0.899469        NaN     NaN      NaN
+X168         1.893251        NaN     NaN      NaN
+X169        -0.826526        NaN     NaN      NaN
+X170        -0.852500        NaN     NaN      NaN
+X171         0.179502        NaN     NaN      NaN
+X172        -1.004441        NaN     NaN      NaN
+X173         0.383975        NaN     NaN      NaN
+X174        -1.333394        NaN     NaN      NaN
+X175         0.468282        NaN     NaN      NaN
+X176        -1.745036        NaN     NaN      NaN
+X177        -0.211079        NaN     NaN      NaN
+X178        -0.311006        NaN     NaN      NaN
+X179        -2.132161        NaN     NaN      NaN
+X180         2.002865        NaN     NaN      NaN
+X181        -1.021658        NaN     NaN      NaN
+X182         1.275638        NaN     NaN      NaN
+X183         0.792299        NaN     NaN      NaN
+X184        -0.271414        NaN     NaN      NaN
+X185         1.124869        NaN     NaN      NaN
+X186         0.220740        NaN     NaN      NaN
+X187         0.683682        NaN     NaN      NaN
+X188         0.558524        NaN     NaN      NaN
+X189        -0.346951        NaN     NaN      NaN
+X190         0.582127        NaN     NaN      NaN
+X191        -0.690100        NaN     NaN      NaN
+X192        -0.552938        NaN     NaN      NaN
+X193         0.700031        NaN     NaN      NaN
+X194         0.658075        NaN     NaN      NaN
+X195         0.658229        NaN     NaN      NaN
+X196         0.399872        NaN     NaN      NaN
+X197         0.743954        NaN     NaN      NaN
+X198         0.023139        NaN     NaN      NaN
+X199        -2.396019        NaN     NaN      NaN
+X200        -0.259909        NaN     NaN      NaN
+X201        -1.699521        NaN     NaN      NaN
+X202        -0.474263        NaN     NaN      NaN
+X203         0.335858        NaN     NaN      NaN
+X204        -0.017226        NaN     NaN      NaN
+X205        -0.216329        NaN     NaN      NaN
+X206         0.266491        NaN     NaN      NaN
+X207        -0.202126        NaN     NaN      NaN
+X208         0.944858        NaN     NaN      NaN
+X209        -0.219237        NaN     NaN      NaN
+X210         0.080118        NaN     NaN      NaN
+X211         0.449842        NaN     NaN      NaN
+X212         1.255553        NaN     NaN      NaN
+X213         0.672041        NaN     NaN      NaN
+X214        -0.568276        NaN     NaN      NaN
+X215         0.220789        NaN     NaN      NaN
+X216         0.411767        NaN     NaN      NaN
+X217         0.563548        NaN     NaN      NaN
+X218         1.226737        NaN     NaN      NaN
+X219         1.254887        NaN     NaN      NaN
+X220         1.209575        NaN     NaN      NaN
+X221         0.195890        NaN     NaN      NaN
+X222        -1.156602        NaN     NaN      NaN
+X223        -0.071910        NaN     NaN      NaN
+X224         0.921345        NaN     NaN      NaN
+X225        -0.073624        NaN     NaN      NaN
+X226        -1.784675        NaN     NaN      NaN
+X227         0.822514        NaN     NaN      NaN
+X228        -0.651030        NaN     NaN      NaN
+X229        -0.235464        NaN     NaN      NaN
+X230        -1.108576        NaN     NaN      NaN
+X231         2.482755        NaN     NaN      NaN
+X232        -0.313589        NaN     NaN      NaN
+X233         0.042552        NaN     NaN      NaN
+X234        -2.179675        NaN     NaN      NaN
+X235        -0.308733        NaN     NaN      NaN
+X236        -0.135358        NaN     NaN      NaN
+X237        -2.891765        NaN     NaN      NaN
+X238        -2.042381        NaN     NaN      NaN
+X239         0.057057        NaN     NaN      NaN
+X240        -0.303286        NaN     NaN      NaN
+X241        -1.117514        NaN     NaN      NaN
+X242         1.608162        NaN     NaN      NaN
+X243        -2.080906        NaN     NaN      NaN
+X244         0.340553        NaN     NaN      NaN
+X245         0.553033        NaN     NaN      NaN
+X246         0.702664        NaN     NaN      NaN
+X247         1.801294        NaN     NaN      NaN
+X248        -1.395451        NaN     NaN      NaN
+X249        -1.466354        NaN     NaN      NaN
+X250         0.684908        NaN     NaN      NaN
+X251         0.482037        NaN     NaN      NaN
+X252        -0.636816        NaN     NaN      NaN
+X253        -0.810612        NaN     NaN      NaN
+X254        -0.585653        NaN     NaN      NaN
+X255        -0.623028        NaN     NaN      NaN
+X256         2.559767        NaN     NaN      NaN
+X257         2.101385        NaN     NaN      NaN
+X258         0.132009        NaN     NaN      NaN
+X259        -0.923922        NaN     NaN      NaN
+X260        -1.304965        NaN     NaN      NaN
+X261         1.010383        NaN     NaN      NaN
+X262         1.112482        NaN     NaN      NaN
+X263        -0.990761        NaN     NaN      NaN
+X264         1.984657        NaN     NaN      NaN
+X265         0.274243        NaN     NaN      NaN
+X266         1.200853        NaN     NaN      NaN
+X267         0.459882        NaN     NaN      NaN
+X268         0.766545        NaN     NaN      NaN
+X269         1.355922        NaN     NaN      NaN
+X270         0.667408        NaN     NaN      NaN
+X271         0.245942        NaN     NaN      NaN
+X272         1.199548        NaN     NaN      NaN
+X273         1.113385        NaN     NaN      NaN
+X274         0.511989        NaN     NaN      NaN
+X275        -0.019120        NaN     NaN      NaN
+X276         1.285163        NaN     NaN      NaN
+X277         0.156968        NaN     NaN      NaN
+X278         0.119607        NaN     NaN      NaN
+X279         0.230129        NaN     NaN      NaN
+X280        -0.417177        NaN     NaN      NaN
+X281         0.666849        NaN     NaN      NaN
+X282        -1.124804        NaN     NaN      NaN
+X283        -1.156615        NaN     NaN      NaN
+X284        -0.326774        NaN     NaN      NaN
+X285        -0.441675        NaN     NaN      NaN
+X286        -1.448107        NaN     NaN      NaN
+X287        -0.271217        NaN     NaN      NaN
+X288         0.700434        NaN     NaN      NaN
+X289         0.574892        NaN     NaN      NaN
+X290         1.267122        NaN     NaN      NaN
+X291         0.706586        NaN     NaN      NaN
+X292        -0.054272        NaN     NaN      NaN
+X293         0.612601        NaN     NaN      NaN
+X294         1.780609        NaN     NaN      NaN
+X295         0.618910        NaN     NaN      NaN
+X296         0.456370        NaN     NaN      NaN
+X297        -1.146904        NaN     NaN      NaN
+X298         1.068025        NaN     NaN      NaN
+X299        -0.310504        NaN     NaN      NaN
+X300         1.333315        NaN     NaN      NaN
+X301         1.478049        NaN     NaN      NaN
+X302         0.261685        NaN     NaN      NaN
+X303        -0.772172        NaN     NaN      NaN
+X304        -0.278806        NaN     NaN      NaN
+X305         0.150578        NaN     NaN      NaN
+X306         0.288554        NaN     NaN      NaN
+X307         0.055867        NaN     NaN      NaN
+X308        -0.037013        NaN     NaN      NaN
+X309        -1.294538        NaN     NaN      NaN
+X310         0.567772        NaN     NaN      NaN
+X311         0.681809        NaN     NaN      NaN
+X312        -0.315303        NaN     NaN      NaN
+X313        -0.098438        NaN     NaN      NaN
+X314         1.726010        NaN     NaN      NaN
+X315         1.405757        NaN     NaN      NaN
+X316         0.853992        NaN     NaN      NaN
+X317         0.272026        NaN     NaN      NaN
+X318        -0.124769        NaN     NaN      NaN
+X319         1.115893        NaN     NaN      NaN
+X320        -0.047445        NaN     NaN      NaN
+X321        -0.896475        NaN     NaN      NaN
+X322         0.275955        NaN     NaN      NaN
+X323        -0.861203        NaN     NaN      NaN
+X324         0.184824        NaN     NaN      NaN
+X325        -0.126132        NaN     NaN      NaN
+X326        -0.237513        NaN     NaN      NaN
+X327         1.509593        NaN     NaN      NaN
+X328         0.199883        NaN     NaN      NaN
+X329         0.009102        NaN     NaN      NaN
+X330         0.983663        NaN     NaN      NaN
+X331        -0.822235        NaN     NaN      NaN
+X332         0.525824        NaN     NaN      NaN
+X333        -1.414454        NaN     NaN      NaN
+X334         0.867627        NaN     NaN      NaN
+X335         0.636137        NaN     NaN      NaN
+X336         0.559385        NaN     NaN      NaN
+X337        -0.250308        NaN     NaN      NaN
+X338        -0.269449        NaN     NaN      NaN
+X339        -0.794273        NaN     NaN      NaN
+X340        -1.017588        NaN     NaN      NaN
+X341        -0.122876        NaN     NaN      NaN
+X342         1.378735        NaN     NaN      NaN
+X343        -0.747976        NaN     NaN      NaN
+X344        -1.666190        NaN     NaN      NaN
+X345         1.339289        NaN     NaN      NaN
+X346        -1.588749        NaN     NaN      NaN
+X347         0.912783        NaN     NaN      NaN
+X348         0.305822        NaN     NaN      NaN
+X349         0.322733        NaN     NaN      NaN
+X350        -2.491511        NaN     NaN      NaN
+X351         1.644905        NaN     NaN      NaN
+X352        -0.859324        NaN     NaN      NaN
+X353         0.712963        NaN     NaN      NaN
+X354        -1.856516        NaN     NaN      NaN
+X355         0.251258        NaN     NaN      NaN
+X356        -1.719492        NaN     NaN      NaN
+X357        -0.470747        NaN     NaN      NaN
+X358         0.420817        NaN     NaN      NaN
+X359        -1.109228        NaN     NaN      NaN
+X360         1.352100        NaN     NaN      NaN
+X361         0.921780        NaN     NaN      NaN
+X362         0.652245        NaN     NaN      NaN
+X363         1.155519        NaN     NaN      NaN
+X364         0.822752        NaN     NaN      NaN
+X365        -0.154287        NaN     NaN      NaN
+X366        -1.253793        NaN     NaN      NaN
+X367        -0.503516        NaN     NaN      NaN
+X368         0.467505        NaN     NaN      NaN
+X369         1.068239        NaN     NaN      NaN
+X370        -0.682634        NaN     NaN      NaN
+X371         0.813687        NaN     NaN      NaN
+X372         1.847487        NaN     NaN      NaN
+X373         0.652319        NaN     NaN      NaN
+X374        -0.528587        NaN     NaN      NaN
+X375         0.337749        NaN     NaN      NaN
+X376         0.888699        NaN     NaN      NaN
+X377         1.703644        NaN     NaN      NaN
+X378         0.295379        NaN     NaN      NaN
+X379         0.735615        NaN     NaN      NaN
+X380         0.611270        NaN     NaN      NaN
+X381         0.824603        NaN     NaN      NaN
+X382         0.547183        NaN     NaN      NaN
+X383        -0.355574        NaN     NaN      NaN
+X384        -0.026269        NaN     NaN      NaN
+X385         0.298796        NaN     NaN      NaN
+X386         0.509534        NaN     NaN      NaN
+X387         1.421818        NaN     NaN      NaN
+X388        -0.903638        NaN     NaN      NaN
+X389         0.282683        NaN     NaN      NaN
+X390        -2.498324        NaN     NaN      NaN
+X391        -0.470433        NaN     NaN      NaN
+X392         0.012955        NaN     NaN      NaN
+X393        -0.545372        NaN     NaN      NaN
+X394         0.542572        NaN     NaN      NaN
+X395        -0.460320        NaN     NaN      NaN
+X396        -1.663585        NaN     NaN      NaN
+X397         2.183966        NaN     NaN      NaN
+X398         0.297957        NaN     NaN      NaN
+X399         0.767298        NaN     NaN      NaN
+X400        -0.227982        NaN     NaN      NaN
+X401        -0.948386        NaN     NaN      NaN
+X402        -0.008633        NaN     NaN      NaN
+X403         0.537033        NaN     NaN      NaN
+X404        -0.026809        NaN     NaN      NaN
+X405         0.647950        NaN     NaN      NaN
+X406         0.572656        NaN     NaN      NaN
+X407         1.883461        NaN     NaN      NaN
+X408         0.869962        NaN     NaN      NaN
+X409         1.429329        NaN     NaN      NaN
+X410         0.726568        NaN     NaN      NaN
+X411        -0.009260        NaN     NaN      NaN
+X412        -0.676103        NaN     NaN      NaN
+X413         1.826539        NaN     NaN      NaN
+X414         1.476767        NaN     NaN      NaN
+X415        -0.499736        NaN     NaN      NaN
+X416         0.291202        NaN     NaN      NaN
+X417        -1.109126        NaN     NaN      NaN
+X418        -2.164942        NaN     NaN      NaN
+X419         0.238212        NaN     NaN      NaN
+X420         0.162674        NaN     NaN      NaN
+X421        -0.628933        NaN     NaN      NaN
+X422         0.558438        NaN     NaN      NaN
+X423        -0.683811        NaN     NaN      NaN
+X424        -0.569969        NaN     NaN      NaN
+X425        -1.084627        NaN     NaN      NaN
+X426         0.244214        NaN     NaN      NaN
+X427        -1.707482        NaN     NaN      NaN
+X428        -0.357296        NaN     NaN      NaN
+X429         0.577928        NaN     NaN      NaN
+X430         0.334154        NaN     NaN      NaN
+X431        -1.678189        NaN     NaN      NaN
+X432        -0.005777        NaN     NaN      NaN
+X433        -0.990716        NaN     NaN      NaN
+X434         0.139341        NaN     NaN      NaN
+X435        -0.965072        NaN     NaN      NaN
+X436        -0.053865        NaN     NaN      NaN
+X437         0.711503        NaN     NaN      NaN
+X438         0.089790        NaN     NaN      NaN
+X439         0.891956        NaN     NaN      NaN
+X440        -0.533179        NaN     NaN      NaN
+X441         0.160227        NaN     NaN      NaN
+X442         0.272697        NaN     NaN      NaN
+X443        -0.318887        NaN     NaN      NaN
+X444         0.302103        NaN     NaN      NaN
+X445        -0.935416        NaN     NaN      NaN
+X446         0.374215        NaN     NaN      NaN
+X447         1.797081        NaN     NaN      NaN
+X448        -1.161264        NaN     NaN      NaN
+X449         0.555101        NaN     NaN      NaN
+X450        -0.149889        NaN     NaN      NaN
+X451        -0.954216        NaN     NaN      NaN
+X452         0.623411        NaN     NaN      NaN
+X453         0.436912        NaN     NaN      NaN
+X454         0.550907        NaN     NaN      NaN
+X455         0.634940        NaN     NaN      NaN
+X456        -0.296808        NaN     NaN      NaN
+X457        -0.477914        NaN     NaN      NaN
+X458         0.168249        NaN     NaN      NaN
+X459         1.826461        NaN     NaN      NaN
+X460         1.365288        NaN     NaN      NaN
+X461         0.882510        NaN     NaN      NaN
+X462        -0.999397        NaN     NaN      NaN
+X463         1.422760        NaN     NaN      NaN
+X464        -0.435069        NaN     NaN      NaN
+X465         0.890322        NaN     NaN      NaN
+X466         0.416454        NaN     NaN      NaN
+X467         1.462144        NaN     NaN      NaN
+X468        -0.400669        NaN     NaN      NaN
+X469         0.563410        NaN     NaN      NaN
+X470         1.087788        NaN     NaN      NaN
+X471         1.060630        NaN     NaN      NaN
+X472         0.009927        NaN     NaN      NaN
+X473         0.785376        NaN     NaN      NaN
+X474         0.027545        NaN     NaN      NaN
+X475        -0.409097        NaN     NaN      NaN
+X476        -0.928221        NaN     NaN      NaN
+X477         0.462007        NaN     NaN      NaN
+X478        -1.556474        NaN     NaN      NaN
+X479         0.021573        NaN     NaN      NaN
+X480        -0.075878        NaN     NaN      NaN
+X481         2.792562        NaN     NaN      NaN
+X482        -1.575204        NaN     NaN      NaN
+X483         0.665310        NaN     NaN      NaN
+X484        -0.600531        NaN     NaN      NaN
+X485        -1.022760        NaN     NaN      NaN
+X486        -0.055130        NaN     NaN      NaN
+X487        -0.661581        NaN     NaN      NaN
+X488        -1.226090        NaN     NaN      NaN
+X489         0.137420        NaN     NaN      NaN
+X490         0.925601        NaN     NaN      NaN
+X491        -0.111655        NaN     NaN      NaN
+X492        -0.737260        NaN     NaN      NaN
+X493        -1.876187        NaN     NaN      NaN
+X494         1.979839        NaN     NaN      NaN
+X495        -1.015430        NaN     NaN      NaN
+X496        -0.030625        NaN     NaN      NaN
+X497        -1.460465        NaN     NaN      NaN
+X498         0.810663        NaN     NaN      NaN
+X499         1.220530        NaN     NaN      NaN
+X500         0.406931        NaN     NaN      NaN
+X501         0.578664        NaN     NaN      NaN
+X502        -0.698420        NaN     NaN      NaN
+X503        -0.948215        NaN     NaN      NaN
+X504        -0.042647        NaN     NaN      NaN
+X505         0.537439        NaN     NaN      NaN
+X506        -1.360558        NaN     NaN      NaN
+X507         0.244411        NaN     NaN      NaN
+X508         0.156970        NaN     NaN      NaN
+X509        -1.098245        NaN     NaN      NaN
+X510         1.521858        NaN     NaN      NaN
+X511        -1.083627        NaN     NaN      NaN
+X512         1.030804        NaN     NaN      NaN
+X513        -0.158244        NaN     NaN      NaN
+X514         1.087971        NaN     NaN      NaN
+X515        -1.312391        NaN     NaN      NaN
+X516        -0.345873        NaN     NaN      NaN
+X517        -0.866870        NaN     NaN      NaN
+X518         0.124061        NaN     NaN      NaN
+X519         0.258191        NaN     NaN      NaN
+X520        -0.399935        NaN     NaN      NaN
+X521         0.446151        NaN     NaN      NaN
+X522         0.814732        NaN     NaN      NaN
+X523         0.338669        NaN     NaN      NaN
+X524         1.421491        NaN     NaN      NaN
+X525        -0.082680        NaN     NaN      NaN
+X526        -0.493627        NaN     NaN      NaN
+X527        -1.298804        NaN     NaN      NaN
+X528         1.420302        NaN     NaN      NaN
+X529         1.871975        NaN     NaN      NaN
+X530        -1.217738        NaN     NaN      NaN
+X531         0.440541        NaN     NaN      NaN
+X532        -0.766382        NaN     NaN      NaN
+X533        -0.258988        NaN     NaN      NaN
+X534         0.236523        NaN     NaN      NaN
+X535         0.833640        NaN     NaN      NaN
+X536         0.248604        NaN     NaN      NaN
+X537        -1.918749        NaN     NaN      NaN
+X538        -0.473194        NaN     NaN      NaN
+X539         0.804548        NaN     NaN      NaN
+X540        -0.834038        NaN     NaN      NaN
+X541        -1.923313        NaN     NaN      NaN
+X542         0.536226        NaN     NaN      NaN
+X543        -1.166720        NaN     NaN      NaN
+X544         0.766261        NaN     NaN      NaN
+X545        -3.141827        NaN     NaN      NaN
+X546         0.984238        NaN     NaN      NaN
+X547         1.171239        NaN     NaN      NaN
+X548         0.590118        NaN     NaN      NaN
+X549        -0.444819        NaN     NaN      NaN
+X550        -0.451468        NaN     NaN      NaN
+X551        -1.068176        NaN     NaN      NaN
+X552         0.979300        NaN     NaN      NaN
+X553        -0.748292        NaN     NaN      NaN
+X554         1.263668        NaN     NaN      NaN
+X555         0.462104        NaN     NaN      NaN
+X556         1.164628        NaN     NaN      NaN
+X557        -0.167323        NaN     NaN      NaN
+X558        -0.268275        NaN     NaN      NaN
+X559        -0.275400        NaN     NaN      NaN
+X560         1.481914        NaN     NaN      NaN
+X561        -0.896662        NaN     NaN      NaN
+X562         2.931446        NaN     NaN      NaN
+X563        -0.004621        NaN     NaN      NaN
+X564        -1.074310        NaN     NaN      NaN
+X565        -0.711136        NaN     NaN      NaN
+X566         0.776209        NaN     NaN      NaN
+X567         0.230399        NaN     NaN      NaN
+X568         0.131894        NaN     NaN      NaN
+X569         1.133751        NaN     NaN      NaN
+X570        -0.664625        NaN     NaN      NaN
+X571         0.621261        NaN     NaN      NaN
+X572         0.599807        NaN     NaN      NaN
+X573         0.910077        NaN     NaN      NaN
+X574        -1.273464        NaN     NaN      NaN
+X575         1.372805        NaN     NaN      NaN
+X576         2.428131        NaN     NaN      NaN
+X577        -1.633323        NaN     NaN      NaN
+X578         0.054227        NaN     NaN      NaN
+X579         0.503193        NaN     NaN      NaN
+X580         0.262903        NaN     NaN      NaN
+X581        -1.654489        NaN     NaN      NaN
+X582         0.834214        NaN     NaN      NaN
+X583         0.709119        NaN     NaN      NaN
+X584         0.288678        NaN     NaN      NaN
+X585        -0.686767        NaN     NaN      NaN
+X586         1.161006        NaN     NaN      NaN
+X587        -0.131984        NaN     NaN      NaN
+X588        -0.685896        NaN     NaN      NaN
+X589         1.597507        NaN     NaN      NaN
+X590         0.731626        NaN     NaN      NaN
+X591        -0.104402        NaN     NaN      NaN
+X592         0.104961        NaN     NaN      NaN
+X593         2.046412        NaN     NaN      NaN
+X594        -0.606002        NaN     NaN      NaN
+X595         2.485735        NaN     NaN      NaN
+X596        -0.578736        NaN     NaN      NaN
+X597         0.662595        NaN     NaN      NaN
+X598        -0.729287        NaN     NaN      NaN
+X599         0.139102        NaN     NaN      NaN
+X600        -0.198426        NaN     NaN      NaN
+X601        -2.112871        NaN     NaN      NaN
+X602        -1.263536        NaN     NaN      NaN
+X603        -1.083409        NaN     NaN      NaN
+X604         0.125710        NaN     NaN      NaN
+X605        -0.156564        NaN     NaN      NaN
+X606         1.232568        NaN     NaN      NaN
+X607         0.702551        NaN     NaN      NaN
+X608        -0.379977        NaN     NaN      NaN
+X609         0.591713        NaN     NaN      NaN
+X610        -1.819412        NaN     NaN      NaN
+X611        -0.750737        NaN     NaN      NaN
+X612        -2.416927        NaN     NaN      NaN
+X613         1.032053        NaN     NaN      NaN
+X614        -0.002705        NaN     NaN      NaN
+X615         0.064224        NaN     NaN      NaN
+X616        -0.321947        NaN     NaN      NaN
+X617         0.374550        NaN     NaN      NaN
+X618        -0.667238        NaN     NaN      NaN
+X619         1.198280        NaN     NaN      NaN
+X620        -0.645283        NaN     NaN      NaN
+X621         1.953824        NaN     NaN      NaN
+X622        -0.559104        NaN     NaN      NaN
+X623        -0.297735        NaN     NaN      NaN
+X624         0.679130        NaN     NaN      NaN
+X625        -0.533078        NaN     NaN      NaN
+X626        -0.228236        NaN     NaN      NaN
+X627         0.588704        NaN     NaN      NaN
+X628         0.006570        NaN     NaN      NaN
+X629         2.112948        NaN     NaN      NaN
+X630         0.485101        NaN     NaN      NaN
+X631        -0.053875        NaN     NaN      NaN
+X632         1.875758        NaN     NaN      NaN
+X633         1.523648        NaN     NaN      NaN
+X634        -2.830083        NaN     NaN      NaN
+X635        -0.239246        NaN     NaN      NaN
+X636        -1.305872        NaN     NaN      NaN
+X637         0.695272        NaN     NaN      NaN
+X638         1.041385        NaN     NaN      NaN
+X639         0.262512        NaN     NaN      NaN
+X640        -2.459864        NaN     NaN      NaN
+X641         1.438441        NaN     NaN      NaN
+X642        -0.771665        NaN     NaN      NaN
+X643        -1.503930        NaN     NaN      NaN
+X644         0.098943        NaN     NaN      NaN
+X645         0.009860        NaN     NaN      NaN
+X646        -1.850568        NaN     NaN      NaN
+X647        -0.606180        NaN     NaN      NaN
+X648         1.597461        NaN     NaN      NaN
+X649         0.150487        NaN     NaN      NaN
+X650        -0.283352        NaN     NaN      NaN
+X651         2.003072        NaN     NaN      NaN
+X652        -1.105050        NaN     NaN      NaN
+X653        -0.649162        NaN     NaN      NaN
+X654         0.147604        NaN     NaN      NaN
+X655        -1.500060        NaN     NaN      NaN
+X656        -0.686578        NaN     NaN      NaN
+X657         0.904499        NaN     NaN      NaN
+X658         0.571974        NaN     NaN      NaN
+X659        -0.848596        NaN     NaN      NaN
+X660         0.641670        NaN     NaN      NaN
+X661        -1.843715        NaN     NaN      NaN
+X662         1.628481        NaN     NaN      NaN
+X663         1.299918        NaN     NaN      NaN
+X664        -0.334640        NaN     NaN      NaN
+X665         2.533990        NaN     NaN      NaN
+X666         1.044776        NaN     NaN      NaN
+X667         0.937963        NaN     NaN      NaN
+X668         1.241357        NaN     NaN      NaN
+X669        -0.251642        NaN     NaN      NaN
+X670         1.074975        NaN     NaN      NaN
+X671        -0.570301        NaN     NaN      NaN
+X672        -0.989298        NaN     NaN      NaN
+X673         0.885670        NaN     NaN      NaN
+X674         0.381321        NaN     NaN      NaN
+X675         2.218965        NaN     NaN      NaN
+X676         0.967814        NaN     NaN      NaN
+X677        -2.178381        NaN     NaN      NaN
+X678        -0.288490        NaN     NaN      NaN
+X679        -0.954413        NaN     NaN      NaN
+X680         2.114231        NaN     NaN      NaN
+X681         1.407082        NaN     NaN      NaN
+X682        -0.724320        NaN     NaN      NaN
+X683        -0.143374        NaN     NaN      NaN
+X684        -1.718967        NaN     NaN      NaN
+X685         0.788142        NaN     NaN      NaN
+X686        -0.734699        NaN     NaN      NaN
+X687         1.824840        NaN     NaN      NaN
+X688        -0.242937        NaN     NaN      NaN
+X689        -0.519683        NaN     NaN      NaN
+X690         0.849818        NaN     NaN      NaN
+X691         0.322090        NaN     NaN      NaN
+X692         0.779575        NaN     NaN      NaN
+X693        -0.420582        NaN     NaN      NaN
+X694        -0.064469        NaN     NaN      NaN
+X695         2.080565        NaN     NaN      NaN
+X696         1.536731        NaN     NaN      NaN
+X697         0.032247        NaN     NaN      NaN
+X698         1.637691        NaN     NaN      NaN
+X699         1.137384        NaN     NaN      NaN
+X700        -1.222974        NaN     NaN      NaN
+X701        -1.349923        NaN     NaN      NaN
+X702         0.112513        NaN     NaN      NaN
+X703         0.639082        NaN     NaN      NaN
+X704        -0.403681        NaN     NaN      NaN
+X705         0.608599        NaN     NaN      NaN
+X706         0.935850        NaN     NaN      NaN
+X707         0.637876        NaN     NaN      NaN
+X708         1.191470        NaN     NaN      NaN
+X709        -1.023228        NaN     NaN      NaN
+X710        -0.222136        NaN     NaN      NaN
+X711         1.129769        NaN     NaN      NaN
+X712         0.335167        NaN     NaN      NaN
+X713        -0.611317        NaN     NaN      NaN
+X714        -0.314508        NaN     NaN      NaN
+X715         0.438085        NaN     NaN      NaN
+X716         0.219136        NaN     NaN      NaN
+X717        -0.570903        NaN     NaN      NaN
+X718         1.368024        NaN     NaN      NaN
+X719         0.179518        NaN     NaN      NaN
+X720         0.411791        NaN     NaN      NaN
+X721        -0.741816        NaN     NaN      NaN
+X722        -1.248207        NaN     NaN      NaN
+X723        -0.095998        NaN     NaN      NaN
+X724        -1.525577        NaN     NaN      NaN
+X725        -0.569119        NaN     NaN      NaN
+X726         2.461253        NaN     NaN      NaN
+X727        -0.768995        NaN     NaN      NaN
+X728        -2.552612        NaN     NaN      NaN
+X729        -0.424649        NaN     NaN      NaN
+X730         1.093625        NaN     NaN      NaN
+X731        -0.318242        NaN     NaN      NaN
+X732        -0.038705        NaN     NaN      NaN
+X733        -0.808344        NaN     NaN      NaN
+X734        -1.177114        NaN     NaN      NaN
+X735         0.864794        NaN     NaN      NaN
+X736         1.175757        NaN     NaN      NaN
+X737         0.134194        NaN     NaN      NaN
+X738         1.075893        NaN     NaN      NaN
+X739         0.069059        NaN     NaN      NaN
+X740        -0.575849        NaN     NaN      NaN
+X741        -2.152926        NaN     NaN      NaN
+X742         0.090014        NaN     NaN      NaN
+X743        -0.758572        NaN     NaN      NaN
+X744         0.279928        NaN     NaN      NaN
+X745        -1.780719        NaN     NaN      NaN
+X746        -1.020611        NaN     NaN      NaN
+X747        -0.229081        NaN     NaN      NaN
+X748         1.076378        NaN     NaN      NaN
+X749         0.466275        NaN     NaN      NaN
+X750        -1.424122        NaN     NaN      NaN
+X751         0.413523        NaN     NaN      NaN
+X752         0.876645        NaN     NaN      NaN
+X753        -0.875571        NaN     NaN      NaN
+X754        -0.224889        NaN     NaN      NaN
+X755         1.590145        NaN     NaN      NaN
+X756         0.414878        NaN     NaN      NaN
+X757        -0.090071        NaN     NaN      NaN
+X758         0.703831        NaN     NaN      NaN
+X759         2.708567        NaN     NaN      NaN
+X760        -2.121232        NaN     NaN      NaN
+X761         2.004145        NaN     NaN      NaN
+X762        -0.981402        NaN     NaN      NaN
+X763         1.824185        NaN     NaN      NaN
+X764        -0.253301        NaN     NaN      NaN
+X765        -0.271730        NaN     NaN      NaN
+X766        -1.586965        NaN     NaN      NaN
+X767        -0.679315        NaN     NaN      NaN
+X768        -0.292519        NaN     NaN      NaN
+X769        -1.191520        NaN     NaN      NaN
+X770         0.030280        NaN     NaN      NaN
+X771        -0.634046        NaN     NaN      NaN
+X772         0.678133        NaN     NaN      NaN
+X773        -1.838392        NaN     NaN      NaN
+X774         0.481181        NaN     NaN      NaN
+X775        -1.223680        NaN     NaN      NaN
+X776        -1.739501        NaN     NaN      NaN
+X777        -0.078244        NaN     NaN      NaN
+X778         0.806735        NaN     NaN      NaN
+X779         0.144614        NaN     NaN      NaN
+X780         1.555064        NaN     NaN      NaN
+X781        -0.105066        NaN     NaN      NaN
+X782         0.668373        NaN     NaN      NaN
+X783        -0.068489        NaN     NaN      NaN
+X784         0.428704        NaN     NaN      NaN
+X785        -0.420066        NaN     NaN      NaN
+X786        -1.793561        NaN     NaN      NaN
+X787        -0.423337        NaN     NaN      NaN
+X788        -0.708570        NaN     NaN      NaN
+X789         0.414273        NaN     NaN      NaN
+X790        -0.366804        NaN     NaN      NaN
+X791        -0.674084        NaN     NaN      NaN
+X792         1.544668        NaN     NaN      NaN
+X793        -1.954283        NaN     NaN      NaN
+X794         0.499203        NaN     NaN      NaN
+X795        -0.716489        NaN     NaN      NaN
+X796        -0.879040        NaN     NaN      NaN
+X797        -0.576917        NaN     NaN      NaN
+X798         0.465976        NaN     NaN      NaN
+X799        -0.163069        NaN     NaN      NaN
+X800         0.996227        NaN     NaN      NaN
+X801         0.581473        NaN     NaN      NaN
+X802         0.484286        NaN     NaN      NaN
+X803        -1.178471        NaN     NaN      NaN
+X804        -1.001196        NaN     NaN      NaN
+X805        -1.006614        NaN     NaN      NaN
+X806        -0.951458        NaN     NaN      NaN
+X807         1.924971        NaN     NaN      NaN
+X808         0.407999        NaN     NaN      NaN
+X809        -0.074624        NaN     NaN      NaN
+X810         1.460213        NaN     NaN      NaN
+X811        -0.823954        NaN     NaN      NaN
+X812         0.370283        NaN     NaN      NaN
+X813        -1.473614        NaN     NaN      NaN
+X814         0.501832        NaN     NaN      NaN
+X815         0.620000        NaN     NaN      NaN
+X816        -1.771663        NaN     NaN      NaN
+X817        -0.210013        NaN     NaN      NaN
+X818         0.312982        NaN     NaN      NaN
+X819        -1.853075        NaN     NaN      NaN
+X820         0.631463        NaN     NaN      NaN
+X821        -0.795002        NaN     NaN      NaN
+X822         0.686812        NaN     NaN      NaN
+X823         2.075603        NaN     NaN      NaN
+X824         0.295488        NaN     NaN      NaN
+X825         1.039015        NaN     NaN      NaN
+X826         0.870540        NaN     NaN      NaN
+X827        -0.969754        NaN     NaN      NaN
+X828        -0.625110        NaN     NaN      NaN
+X829        -0.733102        NaN     NaN      NaN
+X830         1.283411        NaN     NaN      NaN
+X831        -2.143271        NaN     NaN      NaN
+X832        -2.019719        NaN     NaN      NaN
+X833         0.609071        NaN     NaN      NaN
+X834         1.406209        NaN     NaN      NaN
+X835        -0.921951        NaN     NaN      NaN
+X836        -1.548518        NaN     NaN      NaN
+X837         0.945544        NaN     NaN      NaN
+X838         0.093752        NaN     NaN      NaN
+X839        -1.316519        NaN     NaN      NaN
+X840         0.957796        NaN     NaN      NaN
+X841         0.664785        NaN     NaN      NaN
+X842         1.356457        NaN     NaN      NaN
+X843        -1.137748        NaN     NaN      NaN
+X844        -2.492270        NaN     NaN      NaN
+X845        -0.010356        NaN     NaN      NaN
+X846         1.599235        NaN     NaN      NaN
+X847         0.917700        NaN     NaN      NaN
+X848         0.780511        NaN     NaN      NaN
+X849         0.317521        NaN     NaN      NaN
+X850         0.675673        NaN     NaN      NaN
+X851        -0.370166        NaN     NaN      NaN
+X852        -0.876212        NaN     NaN      NaN
+X853        -1.650830        NaN     NaN      NaN
+X854        -0.854321        NaN     NaN      NaN
+X855        -1.595719        NaN     NaN      NaN
+X856         0.874831        NaN     NaN      NaN
+X857         0.323699        NaN     NaN      NaN
+X858        -1.204934        NaN     NaN      NaN
+X859         0.860286        NaN     NaN      NaN
+X860        -0.863958        NaN     NaN      NaN
+X861        -1.067800        NaN     NaN      NaN
+X862         0.028263        NaN     NaN      NaN
+X863        -0.822056        NaN     NaN      NaN
+X864         0.637476        NaN     NaN      NaN
+X865        -0.074582        NaN     NaN      NaN
+X866        -0.338951        NaN     NaN      NaN
+X867         0.129696        NaN     NaN      NaN
+X868        -0.104889        NaN     NaN      NaN
+X869         0.298901        NaN     NaN      NaN
+X870        -0.238914        NaN     NaN      NaN
+X871        -0.366065        NaN     NaN      NaN
+X872        -0.264690        NaN     NaN      NaN
+X873         1.202362        NaN     NaN      NaN
+X874        -0.549962        NaN     NaN      NaN
+X875        -2.088231        NaN     NaN      NaN
+X876        -0.027644        NaN     NaN      NaN
+X877         0.974172        NaN     NaN      NaN
+X878         1.510968        NaN     NaN      NaN
+X879         0.432073        NaN     NaN      NaN
+X880        -0.352977        NaN     NaN      NaN
+X881        -0.766975        NaN     NaN      NaN
+X882         0.351735        NaN     NaN      NaN
+X883        -0.035980        NaN     NaN      NaN
+X884        -1.032702        NaN     NaN      NaN
+X885        -1.809417        NaN     NaN      NaN
+X886         0.683525        NaN     NaN      NaN
+X887        -0.854053        NaN     NaN      NaN
+X888        -0.303659        NaN     NaN      NaN
+X889         0.554175        NaN     NaN      NaN
+X890         1.624165        NaN     NaN      NaN
+X891        -0.310344        NaN     NaN      NaN
+X892         0.657423        NaN     NaN      NaN
+X893        -0.037414        NaN     NaN      NaN
+X894         1.511326        NaN     NaN      NaN
+X895         0.464098        NaN     NaN      NaN
+X896         0.890312        NaN     NaN      NaN
+X897         0.709004        NaN     NaN      NaN
+X898        -0.920083        NaN     NaN      NaN
+X899        -0.027544        NaN     NaN      NaN
+X900         0.304420        NaN     NaN      NaN
+X901        -1.651255        NaN     NaN      NaN
+X902         0.650808        NaN     NaN      NaN
+X903         0.908769        NaN     NaN      NaN
+X904         1.429670        NaN     NaN      NaN
+X905        -1.373653        NaN     NaN      NaN
+X906        -0.282404        NaN     NaN      NaN
+X907         1.139033        NaN     NaN      NaN
+X908        -0.559707        NaN     NaN      NaN
+X909        -0.362206        NaN     NaN      NaN
+X910         0.514453        NaN     NaN      NaN
+X911        -0.889156        NaN     NaN      NaN
+X912         1.543847        NaN     NaN      NaN
+X913         0.020883        NaN     NaN      NaN
+X914         2.652590        NaN     NaN      NaN
+X915        -0.479533        NaN     NaN      NaN
+X916        -1.158430        NaN     NaN      NaN
+X917        -0.082925        NaN     NaN      NaN
+X918        -0.429388        NaN     NaN      NaN
+X919        -0.490191        NaN     NaN      NaN
+X920         0.102742        NaN     NaN      NaN
+X921         2.003195        NaN     NaN      NaN
+X922         1.809655        NaN     NaN      NaN
+X923        -0.444156        NaN     NaN      NaN
+X924        -0.212923        NaN     NaN      NaN
+X925         0.786934        NaN     NaN      NaN
+X926        -1.443374        NaN     NaN      NaN
+X927         1.660328        NaN     NaN      NaN
+X928        -1.525326        NaN     NaN      NaN
+X929         0.113671        NaN     NaN      NaN
+X930         0.485223        NaN     NaN      NaN
+X931         2.244857        NaN     NaN      NaN
+X932         0.352582        NaN     NaN      NaN
+X933         0.177646        NaN     NaN      NaN
+X934         1.093901        NaN     NaN      NaN
+X935        -0.201963        NaN     NaN      NaN
+X936         0.556202        NaN     NaN      NaN
+X937         0.207166        NaN     NaN      NaN
+X938        -0.189336        NaN     NaN      NaN
+X939         1.491360        NaN     NaN      NaN
+X940        -1.898758        NaN     NaN      NaN
+X941         1.555028        NaN     NaN      NaN
+X942         2.248813        NaN     NaN      NaN
+X943         0.846128        NaN     NaN      NaN
+X944         0.565752        NaN     NaN      NaN
+X945         1.177434        NaN     NaN      NaN
+X946         2.568994        NaN     NaN      NaN
+X947        -0.203523        NaN     NaN      NaN
+X948         1.184648        NaN     NaN      NaN
+X949         1.091101        NaN     NaN      NaN
+X950         0.164521        NaN     NaN      NaN
+X951         0.204065        NaN     NaN      NaN
+X952        -0.708191        NaN     NaN      NaN
+X953         1.916488        NaN     NaN      NaN
+X954         1.444855        NaN     NaN      NaN
+X955        -0.175483        NaN     NaN      NaN
+X956         1.628957        NaN     NaN      NaN
+X957        -0.991600        NaN     NaN      NaN
+X958         0.905551        NaN     NaN      NaN
+X959         0.002684        NaN     NaN      NaN
+X960         0.039700        NaN     NaN      NaN
+X961        -0.797598        NaN     NaN      NaN
+X962         1.978078        NaN     NaN      NaN
+X963         0.040228        NaN     NaN      NaN
+X964        -0.259415        NaN     NaN      NaN
+X965        -0.144503        NaN     NaN      NaN
+X966        -0.139212        NaN     NaN      NaN
+X967        -1.657117        NaN     NaN      NaN
+X968        -1.106921        NaN     NaN      NaN
+X969        -0.257265        NaN     NaN      NaN
+X970         0.779014        NaN     NaN      NaN
+X971         0.440631        NaN     NaN      NaN
+X972         0.294300        NaN     NaN      NaN
+X973        -0.910328        NaN     NaN      NaN
+X974         2.225939        NaN     NaN      NaN
+X975         0.678670        NaN     NaN      NaN
+X976        -0.471417        NaN     NaN      NaN
+X977        -0.811521        NaN     NaN      NaN
+X978         2.328378        NaN     NaN      NaN
+X979         1.112611        NaN     NaN      NaN
+X980        -0.552611        NaN     NaN      NaN
+X981        -1.541584        NaN     NaN      NaN
+X982        -0.666836        NaN     NaN      NaN
+X983         0.929558        NaN     NaN      NaN
+X984         0.167772        NaN     NaN      NaN
+X985        -0.567431        NaN     NaN      NaN
+X986        -0.302690        NaN     NaN      NaN
+X987        -1.454289        NaN     NaN      NaN
+X988         0.151760        NaN     NaN      NaN
+X989        -0.944322        NaN     NaN      NaN
+X990        -0.030273        NaN     NaN      NaN
+X991         0.765708        NaN     NaN      NaN
+X992        -1.626187        NaN     NaN      NaN
+X993        -0.020070        NaN     NaN      NaN
+X994        -1.015520        NaN     NaN      NaN
+X995        -1.709653        NaN     NaN      NaN
+X996         2.107076        NaN     NaN      NaN
+X997         1.250854        NaN     NaN      NaN
+X998         1.513958        NaN     NaN      NaN
+X999         0.800422        NaN     NaN      NaN
+X1000              NA         NA      NA       NA
+
+Residual standard error: NaN on 0 degrees of freedom
+Multiple R-squared:      1,	Adjusted R-squared:    NaN 
+F-statistic:   NaN on 999 and 0 DF,  p-value: NA
+</pre></div>
+</div>
+</div>
+</div>
+<p>Second, set p=n/2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="m">1000</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">n</span><span class="o">/</span><span class="m">2</span>
+<span class="n">X</span><span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">p</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">Y</span><span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;p/n is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;R2 is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">))</span><span class="o">$</span><span class="n">r.squared</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;Adjusted R2 is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">))</span><span class="o">$</span><span class="n">adj.r.squared</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;p/n is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 0.5
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;R2 is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 0.4922339
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Adjusted R2 is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] -0.01654975
+</pre></div>
+</div>
+</div>
+</div>
+<p>Third, set p/n =.05</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">123</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="m">1000</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">.</span><span class="m">05</span><span class="o">*</span><span class="n">n</span>
+<span class="n">X</span><span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">p</span><span class="p">),</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">Y</span><span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;p/n is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;R2 is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">))</span><span class="o">$</span><span class="n">r.squared</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="s">&quot;Adjusted R2 is&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">summary</span><span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span><span class="o">~</span><span class="n">X</span><span class="p">))</span><span class="o">$</span><span class="n">adj.r.squared</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;p/n is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 0.05
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;R2 is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] 0.04295907
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] &quot;Adjusted R2 is&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] -0.00746458
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "tjhon/test_gha",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./R_notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Welcome to your Jupyter Book</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="02_ols-and-lasso-for-wage-prediction.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
